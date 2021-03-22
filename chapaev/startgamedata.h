@@ -6,7 +6,7 @@
 class StartGameData
 {
 private:
-    static StartGameData * instance;
+    inline static StartGameData * instance;
     int BlackCheckersQuantity;
     int WhiteCheckersQuantity;
     QVector2D *BlackCHeckersPos;

@@ -26,17 +26,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         checker.cpp \
         gameposition.cpp \
-        graphicsdata.cpp \
         main.cpp \
         mainwindow.cpp \
-        startgamedata.cpp
+        startgamedata.cpp \
+    game.cpp
 
 HEADERS += \
         checker.h \
         gameposition.h \
-        graphicsdata.h \
         mainwindow.h \
-        startgamedata.h
+        startgamedata.h \
+    game.h
 
 FORMS += \
         mainwindow.ui
