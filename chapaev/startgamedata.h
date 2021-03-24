@@ -6,19 +6,20 @@
 class StartGameData
 {
 private:
-    inline static StartGameData * instance;
     int BlackCheckersQuantity;
     int WhiteCheckersQuantity;
-    QVector2D *BlackCHeckersPos;
-    QVector2D *WhiteCHeckersPos;
+    QVector2D *BlackCheckersPos;
+    QVector2D *WhiteCheckersPos;
 
     void loadGameData();
 
 public:
-    static StartGameData *GetInstance();
     StartGameData();
     int GetBlackCheckersQuantity();
     int GetWhiteCheckersQuantity();
+
+    QVector2D *GetWhiteCheckersPositions();
+    QVector2D *GetBlackCheckersPositions();
 
 };
 

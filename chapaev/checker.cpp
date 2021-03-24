@@ -8,3 +8,8 @@ QVector2D Checker::GetPosition()
 {
     return position;
 }
+
+void Checker::SetPosition(QVector2D position)
+{
+    this->position = position;
+}

@@ -7,12 +7,13 @@ class Game
 private:
     int WhitePoints;
     int BlackPoints;
+    bool WhitesTurn;
 
 
 public:
     Game();
     void InitGameData();
-    void ResetGame();
+    bool IsWhitesTurn();
 };
 
 #endif // GAME_H
