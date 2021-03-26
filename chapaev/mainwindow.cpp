@@ -8,11 +8,10 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    //this->setFixedHeight(XsceneSize);
-    //this->setFixedWidth(YsceneSize);
+    this->setFixedHeight(XsceneSize);
+    this->setFixedWidth(YsceneSize);
     ui->setupUi(this);
-    ui->graphicsView->setFixedSize(playgroundSize, playgroundSize);
-    ui->Ui_MainWindow.centralWidget->adjustSize();
+    //ui->graphicsView->setFixedSize(playgroundSize, playgroundSize);
 }
 
 MainWindow::~MainWindow()
