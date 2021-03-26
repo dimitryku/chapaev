@@ -35,5 +35,6 @@ void GamePosition::ResetGamePosition()
         BlackCheckers[i]->SetPosition(data->GetBlackCheckersPositions()[i]);
         // TODO: добавить по необходимости
     }
+    delete data;
 
 }

@@ -14,6 +14,7 @@ public:
     Game();
     void InitGameData();
     bool IsWhitesTurn();
+    void ChangeTurn();
 };
 
 #endif // GAME_H

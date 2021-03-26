@@ -9,11 +9,14 @@ class Checker : public QObject
     Q_OBJECT
 private:
     QVector2D position;
+    bool isOutOfGame;
 
 public:
     explicit Checker(QObject *parent = nullptr);
     QVector2D GetPosition();
     void SetPosition(QVector2D position);
+    void SetOutOfGame (bool t);
+    bool GetOutOfGame();
 
 signals:
 

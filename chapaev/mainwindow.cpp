@@ -2,13 +2,17 @@
 #include "ui_mainwindow.h"
 #include "QtGui"
 #include <QMessageBox>
+#include "gameposition.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    //ui->resize(YsceneSize, XsceneSize);
+    //this->setFixedHeight(XsceneSize);
+    //this->setFixedWidth(YsceneSize);
     ui->setupUi(this);
+    ui->graphicsView->setFixedSize(playgroundSize, playgroundSize);
+    ui->Ui_MainWindow.centralWidget->adjustSize();
 }
 
 MainWindow::~MainWindow()
@@ -20,8 +24,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_NewGameButton_clicked()
 {
     QMessageBox *mb = new QMessageBox("Внимание!", "Начать новую игру? Прогресс будет потерян!", QMessageBox::Information, QMessageBox::Yes,
-                                      QMessageBox::No,
-                                      QMessageBox::Cancel | QMessageBox::Escape);
+                                      QMessageBox::No, 0);
     int reply = mb->exec();
     delete mb;
     if(reply == QMessageBox::Yes)

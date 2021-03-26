@@ -2,14 +2,19 @@
 
 Checker::Checker(QObject *parent) : QObject(parent)
 {
+    isOutOfGame = false;
 }
 
-QVector2D Checker::GetPosition()
+void Checker::SetPosition(QVector2D position) { this->position = position; }
+
+void Checker::SetOutOfGame(bool t)
 {
-    return position;
+    this->isOutOfGame = t;
 }
 
-void Checker::SetPosition(QVector2D position)
+bool Checker::GetOutOfGame()
 {
-    this->position = position;
+    return isOutOfGame;
 }
+
+QVector2D Checker::GetPosition() { return position; }
