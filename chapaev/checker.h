@@ -4,19 +4,21 @@
 #include <QObject>
 #include <QVector2D>
 
-class Checker : public QObject
+class Checker
 {
-    Q_OBJECT
 private:
     QVector2D position;
     bool isOutOfGame;
 
 public:
-    explicit Checker(QObject *parent = nullptr);
+    static float radius;
+    explicit Checker();
     QVector2D GetPosition();
     void SetPosition(QVector2D position);
     void SetOutOfGame (bool t);
+    void IncrementPosition(float x, float y);
     bool GetOutOfGame();
+    Checker(Checker& checker);
 
 signals:
 

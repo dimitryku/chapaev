@@ -6,11 +6,12 @@
 class MovingChecker
 {
 public:
-    explicit MovingChecker(Checker *c);
-    MovingChecker(Checker *c, int Xspeed, int Yspeed,);
-    int Xspeed;
-    int Yspeed;
+    float Xspeed;
+    float Yspeed;
     Checker * checker;
+
+    explicit MovingChecker(Checker *c);
+    MovingChecker(Checker *c, float Xspeed, float Yspeed);
 };
 
 #endif // MOVINGCHECKER_H

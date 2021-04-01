@@ -11,9 +11,9 @@ private:
     std::vector<Checker*> BlackCheckers;
 public:
     GamePosition();
-
     void ResetGamePosition();
-    //TODO getters
+    std::vector<Checker*> GetWhiteCheckers();
+    std::vector<Checker*> GetBlackCheckers();
 
 };
 

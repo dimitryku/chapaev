@@ -38,3 +38,14 @@ void GamePosition::ResetGamePosition()
     delete data;
 
 }
+
+std::vector<Checker *> GamePosition::GetWhiteCheckers()
+{
+    return WhiteCheckers;
+}
+
+std::vector<Checker *> GamePosition::GetBlackCheckers()
+{
+    return BlackCheckers;
+}
+

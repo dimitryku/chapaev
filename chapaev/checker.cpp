@@ -1,6 +1,8 @@
 #include "checker.h"
 
-Checker::Checker(QObject *parent) : QObject(parent)
+float Checker::radius = 20;
+
+Checker::Checker()
 {
     isOutOfGame = false;
 }
@@ -12,9 +14,21 @@ void Checker::SetOutOfGame(bool t)
     this->isOutOfGame = t;
 }
 
+void Checker::IncrementPosition(float x, float y)
+{
+    this->position.setX(this->position.x() + x);
+    this->position.setY(this->position.y() + y);
+}
+
 bool Checker::GetOutOfGame()
 {
     return isOutOfGame;
+}
+
+Checker::Checker(Checker &checker)
+{
+    this->position = checker.position;
+    this->isOutOfGame = checker.isOutOfGame;
 }
 
 QVector2D Checker::GetPosition() { return position; }

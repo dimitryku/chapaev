@@ -7,7 +7,7 @@ MovingChecker::MovingChecker(Checker *c)
     this->Yspeed = 0;
 }
 
-MovingChecker::MovingChecker(Checker *c, int Xspeed, int Yspeed)
+MovingChecker::MovingChecker(Checker *c, float Xspeed, float Yspeed)
 {
     this->checker = c;
     this->Xspeed = Xspeed;
