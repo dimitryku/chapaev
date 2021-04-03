@@ -41,12 +41,40 @@ bool Game::CheckerIsMoving(Checker ch)
 
 void Game::RecalculateSpeedWithNewChecker(MovingChecker *movingChecker, MovingChecker *standingChecker)
 {
-    //TODO
+    // Сохраняем скорость движущейся шашшшки в удобном формате
+    QVector2D oldSpeed = QVector2D(movingChecker->Xspeed, movingChecker->Yspeed);
+    // создаем вектор, по которому полетит стоящая шашка и нормируем его
+    QVector2D strikeVector = QVector2D(standingChecker->checker->GetPosition().x() - movingChecker->checker->GetPosition().x(),
+                                       standingChecker->checker->GetPosition().y() - movingChecker->checker->GetPosition().y());
+    strikeVector.normalize();
+    // по теореме косинусов считаем косинус угла удара
+    float strikeAngleCos = (oldSpeed.x() * strikeVector.x() + oldSpeed.y() * strikeVector.y())/oldSpeed.length();
+
+    // Пересчитываем вектора и записываем в пешки
+    float newSpeed = oldSpeed.length() * strikeAngleCos;
+    strikeVector *=(newSpeed);
+    standingChecker->Xspeed = strikeVector.x();
+    standingChecker->Yspeed = strikeVector.y();
+    movingChecker->Xspeed = oldSpeed.x() - strikeVector.x();
+    movingChecker->Yspeed = oldSpeed.y() - strikeVector.y();
 }
 
 void Game::RecalculateSpeeds(MovingChecker* first, MovingChecker* second)
 {
-    if(first->Xspeed == 0 && first->Yspeed == 0 && )
+    // Вызов функции перерассчета, если одна из шашек стоит на месте
+    // Ситуация, что обе шашки стоят на месте, невозможна в связи с логикой их выявления
+    if(first->Xspeed == 0 && first->Yspeed == 0)
+    {
+        RecalculateSpeedWithNewChecker(second, first);
+        return;
+    }
+
+    if(second->Xspeed == 0 && second->Yspeed == 0)
+    {
+        RecalculateSpeedWithNewChecker(first, second);
+        return;
+    }
+
     QVector2D firstVector(first->Xspeed, first->Yspeed);
     QVector2D secondVector(second->Xspeed, second->Yspeed);
     float firstSpeed = firstVector.length();
@@ -102,6 +130,7 @@ void Game::PerformMoves(MovingChecker checker)
     while (movingCheckers.size()!= 0)
     {
         // Сдвигаем шашки
+        std::cout << ttt++ << " " << movingCheckers.size();
         for(int i = 0; i < movingCheckers.size(); i++)
         {
             movingCheckers[i].checker->IncrementPosition(movingCheckers[i].Xspeed, movingCheckers[i].Yspeed);
@@ -114,13 +143,13 @@ void Game::PerformMoves(MovingChecker checker)
         // Удаляем остановившиеся шашки
         for(int i = 0; i < movingCheckers.size(); i++)
         {
-            if(movingCheckers[i].Xspeed < minSpeed || movingCheckers[i].Yspeed < minSpeed)
+            if(movingCheckers[i].Xspeed * (movingCheckers[i].Xspeed < 0 ? -1 : 1) <= minSpeed &&
+                    movingCheckers[i].Yspeed * (movingCheckers[i].Yspeed < 0 ? -1 : 1) <= minSpeed)
             {
                 movingCheckers.erase(movingCheckers.begin() + i);
                 i--;
             }
         }
-        std::cout << ttt++ << " " << movingCheckers.size();
 
         // Проверяем столкновения и задаем соответствующие скорости
         int numOfCheckersToPerform = movingCheckers.size();
@@ -129,6 +158,13 @@ void Game::PerformMoves(MovingChecker checker)
             std::queue<Checker*> affectedCheckers = AffectedCheckers(movingCheckers[i]);
             while(!affectedCheckers.empty())
             {
+                if(movingCheckers[i].Xspeed == 0 && movingCheckers[i].Yspeed == 0)
+                {
+                    for(int j = 0; j < affectedCheckers.size(); j++)
+                        affectedCheckers.pop();
+                    break;
+                }
+
                 if(!CheckerIsMoving(*affectedCheckers.front()))
                 {
                     movingCheckers.push_back(MovingChecker(affectedCheckers.front()));

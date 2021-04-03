@@ -8,6 +8,7 @@ int main(int argc, char *argv[])
     // game check
     Game* game = new Game();
     game->PerformMoves(MovingChecker(game->GetGamePosition()->GetBlackCheckers().at(0), 5, 5));
+    std::cout << "positions: " << std::endl;
     for(Checker* ch : game->GetGamePosition()->GetBlackCheckers())
     {
         std::cout << ch->GetPosition().x() << " " << ch->GetPosition().y() << std::endl;
