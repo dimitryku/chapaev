@@ -1,6 +1,6 @@
 #include "checker.h"
 
-float Checker::radius = 20;
+float Checker::radius = 5;
 
 Checker::Checker()
 {

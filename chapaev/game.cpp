@@ -130,7 +130,7 @@ void Game::PerformMoves(MovingChecker checker)
     while (movingCheckers.size()!= 0)
     {
         // Сдвигаем шашки
-        std::cout << ttt++ << " " << movingCheckers.size();
+        std::cout << ttt++ << " (" << movingCheckers.size() << ") " << std::endl;
         for(int i = 0; i < movingCheckers.size(); i++)
         {
             movingCheckers[i].checker->IncrementPosition(movingCheckers[i].Xspeed, movingCheckers[i].Yspeed);
