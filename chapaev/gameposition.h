@@ -14,7 +14,7 @@ public:
     void ResetGamePosition();
     std::vector<Checker*> GetWhiteCheckers();
     std::vector<Checker*> GetBlackCheckers();
-
+    ~GamePosition();
 };
 
 #endif // GAMEPOSITION_H

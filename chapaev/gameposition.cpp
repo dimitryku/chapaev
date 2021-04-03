@@ -16,7 +16,7 @@ void GamePosition::ResetGamePosition()
     if(WhiteCheckers.size() != checkersNumber)
         WhiteCheckers.resize(checkersNumber);
 
-    //Заполнение начальной информации шашек
+    // Заполнение начальной информации шашек
     for(unsigned int i = 0; i < checkersNumber; i++)
     {
         if(WhiteCheckers[i] == nullptr)
@@ -27,11 +27,11 @@ void GamePosition::ResetGamePosition()
 
     checkersNumber = data->GetBlackCheckersQuantity();
 
-    // Задаем нужное количество белых шашек
+    // Задаем нужное количество черных шашек
     if(BlackCheckers.size() != checkersNumber)
         BlackCheckers.resize(checkersNumber);
 
-    //Заполнение начальной информации шашек
+    // Заполнение начальной информации шашек
     for(unsigned int i = 0; i < checkersNumber; i++)
     {
         if(BlackCheckers[i] == nullptr)
@@ -51,5 +51,11 @@ std::vector<Checker *> GamePosition::GetWhiteCheckers()
 std::vector<Checker *> GamePosition::GetBlackCheckers()
 {
     return BlackCheckers;
+}
+
+GamePosition::~GamePosition()
+{
+    this->BlackCheckers.clear();
+    this->WhiteCheckers.clear();
 }
 

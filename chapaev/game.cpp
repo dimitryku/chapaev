@@ -12,6 +12,8 @@ Game::Game()
     position = new GamePosition();
 }
 
+
+
 void Game::InitGameData()
 {
     WhitesTurn = true;
@@ -108,14 +110,18 @@ std::queue<Checker*> Game::AffectedCheckers(MovingChecker ch)
     std::queue<Checker*> affectedCheckers;
     for(Checker* checker : position->GetBlackCheckers())
     {
-        if(checker->GetPosition().distanceToPoint(ch.checker->GetPosition()) < 2*Checker::radius)
-            affectedCheckers.push(&*checker);
+        if(!checker->GetOutOfGame()) {
+            if(checker->GetPosition().distanceToPoint(ch.checker->GetPosition()) < 2*Checker::radius)
+                affectedCheckers.push(&*checker);
+        }
     }
 
     for(Checker* checker : position->GetWhiteCheckers())
     {
-        if(checker->GetPosition().distanceToPoint(ch.checker->GetPosition()) < 2*Checker::radius)
-            affectedCheckers.push(&*checker);
+        if(!checker->GetOutOfGame()) {
+            if(checker->GetPosition().distanceToPoint(ch.checker->GetPosition()) < 2*Checker::radius)
+                affectedCheckers.push(&*checker);
+        }
     }
 
     return affectedCheckers;
@@ -182,4 +188,9 @@ void Game::PerformMoves(MovingChecker checker)
         }
     }
 
+}
+
+Game::~Game()
+{
+    delete position;
 }

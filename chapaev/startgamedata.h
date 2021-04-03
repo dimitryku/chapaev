@@ -20,6 +20,7 @@ public:
 
     QVector2D *GetWhiteCheckersPositions();
     QVector2D *GetBlackCheckersPositions();
+    ~StartGameData();
 
 };
 

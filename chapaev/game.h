@@ -28,6 +28,7 @@ public:
     bool CheckerIsMoving(Checker ch);
     void RecalculateSpeeds(MovingChecker* first, MovingChecker* second);
     std::queue<Checker*> AffectedCheckers(MovingChecker ch);
+    ~Game();
 
 };
 
