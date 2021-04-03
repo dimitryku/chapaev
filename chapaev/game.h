@@ -16,12 +16,14 @@ private:
     int BlackPoints;
     bool WhitesTurn;
     GamePosition* position;
+    void RecalculateSpeedWithNewChecker(MovingChecker* movingChecker, MovingChecker* standingChecker);
 
 public:
     Game();
     void InitGameData();
     bool IsWhitesTurn();
     void ChangeTurn();
+    GamePosition* GetGamePosition();
     void PerformMoves(MovingChecker checker);
     bool CheckerIsMoving(Checker ch);
     void RecalculateSpeeds(MovingChecker* first, MovingChecker* second);

@@ -19,6 +19,8 @@ void GamePosition::ResetGamePosition()
     //Заполнение начальной информации шашек
     for(unsigned int i = 0; i < checkersNumber; i++)
     {
+        if(WhiteCheckers[i] == nullptr)
+            WhiteCheckers[i] = new Checker();
         WhiteCheckers[i]->SetPosition(data->GetWhiteCheckersPositions()[i]);
         // TODO: добавить по необходимости
     }
@@ -32,6 +34,8 @@ void GamePosition::ResetGamePosition()
     //Заполнение начальной информации шашек
     for(unsigned int i = 0; i < checkersNumber; i++)
     {
+        if(BlackCheckers[i] == nullptr)
+            BlackCheckers[i] = new Checker();
         BlackCheckers[i]->SetPosition(data->GetBlackCheckersPositions()[i]);
         // TODO: добавить по необходимости
     }

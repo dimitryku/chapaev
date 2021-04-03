@@ -1,6 +1,6 @@
 #include "game.h"
 #include "math.h"
-
+#include <iostream>
 
 Game::Game()
 {
@@ -8,7 +8,7 @@ Game::Game()
     BlackPoints = 0;
     WhitePoints = 0;
     minSpeed = 0.3;
-    speedDecrease = 1;
+    speedDecrease = 0.3;
     position = new GamePosition();
 }
 
@@ -23,6 +23,11 @@ bool Game::IsWhitesTurn(){ return WhitesTurn; }
 
 void Game::ChangeTurn(){ WhitesTurn = !WhitesTurn; }
 
+GamePosition *Game::GetGamePosition()
+{
+    return position;
+}
+
 bool Game::CheckerIsMoving(Checker ch)
 {
     for(MovingChecker mch : movingCheckers)
@@ -33,8 +38,15 @@ bool Game::CheckerIsMoving(Checker ch)
     return false;
 }
 
+
+void Game::RecalculateSpeedWithNewChecker(MovingChecker *movingChecker, MovingChecker *standingChecker)
+{
+    //TODO
+}
+
 void Game::RecalculateSpeeds(MovingChecker* first, MovingChecker* second)
 {
+    if(first->Xspeed == 0 && first->Yspeed == 0 && )
     QVector2D firstVector(first->Xspeed, first->Yspeed);
     QVector2D secondVector(second->Xspeed, second->Yspeed);
     float firstSpeed = firstVector.length();
@@ -86,8 +98,19 @@ void Game::PerformMoves(MovingChecker checker)
     movingCheckers.clear();
     movingCheckers.push_back(checker);
 
+    int ttt = 0;
     while (movingCheckers.size()!= 0)
     {
+        // Сдвигаем шашки
+        for(int i = 0; i < movingCheckers.size(); i++)
+        {
+            movingCheckers[i].checker->IncrementPosition(movingCheckers[i].Xspeed, movingCheckers[i].Yspeed);
+            movingCheckers[i].Xspeed -= speedDecrease;
+            std:: cout << " " << movingCheckers[i].Xspeed;
+            movingCheckers[i].Yspeed -= speedDecrease;
+            std:: cout << " " << movingCheckers[i].Yspeed << std::endl;
+        }
+
         // Удаляем остановившиеся шашки
         for(int i = 0; i < movingCheckers.size(); i++)
         {
@@ -97,14 +120,7 @@ void Game::PerformMoves(MovingChecker checker)
                 i--;
             }
         }
-
-        // Сдвигаем шашки
-        for(int i = 0; i < movingCheckers.size(); i++)
-        {
-            movingCheckers[i].checker->IncrementPosition(movingCheckers[i].Xspeed, movingCheckers[i].Yspeed);
-            movingCheckers[i].Xspeed -= speedDecrease;
-            movingCheckers[i].Yspeed -= speedDecrease;
-        }
+        std::cout << ttt++ << " " << movingCheckers.size();
 
         // Проверяем столкновения и задаем соответствующие скорости
         int numOfCheckersToPerform = movingCheckers.size();

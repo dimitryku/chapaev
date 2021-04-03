@@ -3,10 +3,15 @@
 StartGameData::StartGameData()
 {
     //TODO dinamic setting
-    BlackCheckersQuantity = 10;
-    WhiteCheckersQuantity = 10;
+    BlackCheckersQuantity = 5;
+    WhiteCheckersQuantity = 0;
     BlackCheckersPos = new QVector2D[BlackCheckersQuantity];
     WhiteCheckersPos = new QVector2D[WhiteCheckersQuantity];
+    for(int i = 0; i < BlackCheckersQuantity; i++)
+    {
+        BlackCheckersPos[i].setX(i*10);
+        BlackCheckersPos[i].setY(i*10);
+    }
 }
 
 int StartGameData::GetBlackCheckersQuantity(){ return BlackCheckersQuantity; }
