@@ -7,7 +7,7 @@ Game::Game()
     WhitesTurn = true;
     BlackPoints = 0;
     WhitePoints = 0;
-    minSpeed = 0.3;
+    minSpeed = 0;
     speedDecrease = 0.3;
     position = new GamePosition();
 }
@@ -84,9 +84,9 @@ void Game::RecalculateSpeeds(MovingChecker* first, MovingChecker* second)
     firstVector.normalize();
     secondVector.normalize();
     // так как вектора нормированы, их координаты стали косинусом и синусом соответственно
-    float interactionCos = (firstVector.x()*secondVector.x() + firstVector.y()*secondVector.y())
-                    /(firstSpeed*secondSpeed);
-    float interactionSin = sqrt(1 - interactionCos*interactionCos);
+    float interactionCos = (firstVector.x() * secondVector.x() + firstVector.y()*  secondVector.y())
+                    /(firstSpeed * secondSpeed);
+    float interactionSin = sqrt(1 - interactionCos * interactionCos);
 
     // Формула, согласно ф-ле столкновения двух движущихся объектов + косинус разности углов
     // Вес шашек идентичен друг другу.
@@ -111,7 +111,8 @@ std::queue<Checker*> Game::AffectedCheckers(MovingChecker ch)
     for(Checker* checker : position->GetBlackCheckers())
     {
         if(!checker->GetOutOfGame()) {
-            if(checker->GetPosition().distanceToPoint(ch.checker->GetPosition()) < 2*Checker::radius)
+            if(checker->GetPosition().distanceToPoint(ch.checker->GetPosition()) <= 2*Checker::radius
+                    && checker->GetPosition().distanceToPoint(ch.checker->GetPosition()) > 0.001)
                 affectedCheckers.push(&*checker);
         }
     }
@@ -119,7 +120,8 @@ std::queue<Checker*> Game::AffectedCheckers(MovingChecker ch)
     for(Checker* checker : position->GetWhiteCheckers())
     {
         if(!checker->GetOutOfGame()) {
-            if(checker->GetPosition().distanceToPoint(ch.checker->GetPosition()) < 2*Checker::radius)
+            if(checker->GetPosition().distanceToPoint(ch.checker->GetPosition()) <= 2*Checker::radius
+                    && checker->GetPosition().distanceToPoint(ch.checker->GetPosition()) > 0.001)
                 affectedCheckers.push(&*checker);
         }
     }
@@ -140,17 +142,22 @@ void Game::PerformMoves(MovingChecker checker)
         for(int i = 0; i < movingCheckers.size(); i++)
         {
             movingCheckers[i].checker->IncrementPosition(movingCheckers[i].Xspeed, movingCheckers[i].Yspeed);
-            movingCheckers[i].Xspeed -= speedDecrease;
+            if(movingCheckers[i].Xspeed > speedDecrease)
+                movingCheckers[i].Xspeed -= speedDecrease;
+            else
+                movingCheckers[i].Xspeed = minSpeed;
             std:: cout << " " << movingCheckers[i].Xspeed;
-            movingCheckers[i].Yspeed -= speedDecrease;
+            if(movingCheckers[i].Xspeed > speedDecrease)
+                movingCheckers[i].Yspeed -= speedDecrease;
+            else
+                movingCheckers[i].Yspeed = minSpeed;
             std:: cout << " " << movingCheckers[i].Yspeed << std::endl;
         }
 
         // Удаляем остановившиеся шашки
         for(int i = 0; i < movingCheckers.size(); i++)
         {
-            if(movingCheckers[i].Xspeed * (movingCheckers[i].Xspeed < 0 ? -1 : 1) <= minSpeed &&
-                    movingCheckers[i].Yspeed * (movingCheckers[i].Yspeed < 0 ? -1 : 1) <= minSpeed)
+            if(!movingCheckers[i].SpeedIsGood(minSpeed))
             {
                 movingCheckers.erase(movingCheckers.begin() + i);
                 i--;
@@ -181,7 +188,10 @@ void Game::PerformMoves(MovingChecker checker)
                     for(MovingChecker c : movingCheckers)
                     {
                         if(c.checker == affectedCheckers.front())
+                        {
                             RecalculateSpeeds(&movingCheckers.at(i), &c);
+                            break;
+                        }
                     }
                 }
             }

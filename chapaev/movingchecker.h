@@ -12,6 +12,7 @@ public:
 
     explicit MovingChecker(Checker *c);
     MovingChecker(Checker *c, float Xspeed, float Yspeed);
+    bool SpeedIsGood(float speed);
 };
 
 #endif // MOVINGCHECKER_H
