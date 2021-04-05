@@ -19,6 +19,17 @@ bool Physx::CheckerIsMoving(Checker ch)
     return false;
 }
 
+int Physx::FindCheckerInMovingCheckers(Checker* checker)
+{
+    for(int i = 0; i < movingCheckers.size(); i++)
+    {
+        if(movingCheckers[i].checker == checker)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
 
 void Physx::RecalculateSpeedWithNewChecker(MovingChecker *movingChecker, MovingChecker *standingChecker)
 {
@@ -31,7 +42,7 @@ void Physx::RecalculateSpeedWithNewChecker(MovingChecker *movingChecker, MovingC
     // по теореме косинусов считаем косинус угла удара
     float strikeAngleCos = (oldSpeed.x() * strikeVector.x() + oldSpeed.y() * strikeVector.y())/oldSpeed.length();
 
-    // Пересчитываем вектора и записываем в пешки
+    // Пересчитываем вектора и записываем в шашки
     float newSpeed = oldSpeed.length() * strikeAngleCos;
     strikeVector *=(newSpeed);
     standingChecker->Xspeed = strikeVector.x();
@@ -40,51 +51,77 @@ void Physx::RecalculateSpeedWithNewChecker(MovingChecker *movingChecker, MovingC
     movingChecker->Yspeed = oldSpeed.y() - strikeVector.y();
 }
 
-void Physx::RecalculateSpeeds(MovingChecker* first, MovingChecker* second)
+float Physx::SinVminusPhi(QVector2D V, QVector2D phi)
 {
-    // Вызов функции перерассчета, если одна из шашек стоит на месте
-    // Ситуация, что обе шашки стоят на месте, невозможна в связи с логикой их выявления
-    if(first->Xspeed == 0 && first->Yspeed == 0)
-    {
-        RecalculateSpeedWithNewChecker(second, first);
-        return;
-    }
+    return (V.y() * phi.x() - V.x() * phi.y());
+}
 
-    if(second->Xspeed == 0 && second->Yspeed == 0)
-    {
-        RecalculateSpeedWithNewChecker(first, second);
-        return;
-    }
+float Physx::CosVminusPhi(QVector2D V, QVector2D phi)
+{
+    return (V.x() * phi.x() - V.y() * phi.y());
+}
 
+float Physx::CosVplusPhi(QVector2D V, QVector2D phi)
+{
+    return (V.x() * phi.x() + V.y() * phi.y());
+}
+
+float Physx::SinVplusPhi(QVector2D V, QVector2D phi)
+{
+    return (V.y() * phi.x() + V.x() * phi.y());
+}
+
+void Physx::RecalculateSpeedsOfMovingCheckers(MovingChecker* first, MovingChecker* second)
+{
     QVector2D firstVector(first->Xspeed, first->Yspeed);
     QVector2D secondVector(second->Xspeed, second->Yspeed);
     float firstSpeed = firstVector.length();
     float secondSpeed = secondVector.length();
     firstVector.normalize();
     secondVector.normalize();
+    QVector2D piHalf(cos(M_PI/2), sin(M_PI/2));
+    QVector2D interaction;
     // так как вектора нормированы, их координаты стали косинусом и синусом соответственно
-    float interactionCos = (firstVector.x() * secondVector.x() + firstVector.y()*  secondVector.y())
-                    /(firstSpeed * secondSpeed);
-    float interactionSin = sqrt(1 - interactionCos * interactionCos);
+    interaction.setX((firstVector.x() * secondVector.x() + firstVector.y() * secondVector.y())
+                    / (firstSpeed * secondSpeed));
+    interaction.setY(sqrt(1 - interaction.x() * interaction.x()));
 
     // Формула, согласно ф-ле столкновения двух движущихся объектов + косинус разности углов
     // Вес шашек идентичен друг другу.
-    first->Xspeed = 2 * secondSpeed * (secondVector.x()*interactionCos + secondVector.y() * interactionSin) * interactionCos
-                + firstSpeed * (firstVector.y() * interactionCos - firstVector.x() * interactionSin)
-                        * (interactionCos * cos(M_PI/2) + interactionSin * sin(M_PI/2));
-    first->Yspeed = 2*secondSpeed*(secondVector.x() * interactionCos + secondVector.y() * interactionSin) * interactionSin
-                + firstSpeed * (firstVector.y() * interactionCos - firstVector.x() * interactionSin)
-                        * (interactionSin * cos(M_PI/2) + interactionCos * sin(M_PI/2));
+    first->Xspeed = 2 * secondSpeed * CosVminusPhi(secondVector, interaction) * interaction.x()
+                + firstSpeed * SinVminusPhi(firstVector, interaction) * CosVplusPhi(interaction, piHalf);
 
-    second->Xspeed = 2 * firstSpeed * (firstVector.x() * interactionCos + firstVector.y() * interactionSin) * interactionCos
-                + secondSpeed * (secondVector.y() * interactionCos - secondVector.x() * interactionSin)
-                        * (interactionCos * cos(M_PI/2) + interactionSin * sin(M_PI/2));
-    first->Yspeed = 2 * firstSpeed * (firstVector.x() * interactionCos + firstVector.y() * interactionSin) * interactionSin
-                + secondSpeed * (secondVector.y() * interactionCos - secondVector.x() * interactionSin)
-                        * (interactionSin * cos(M_PI/2) + interactionCos * sin(M_PI/2));
+    first->Yspeed = 2 * secondSpeed * CosVminusPhi(secondVector, interaction) * interaction.y()
+                + firstSpeed * SinVminusPhi(firstVector, interaction) * SinVplusPhi(interaction, piHalf);
+
+    second->Xspeed = 2 * firstSpeed * CosVminusPhi(firstVector, interaction) * interaction.x()
+                + secondSpeed * SinVminusPhi(secondVector, interaction) * CosVplusPhi(interaction, piHalf);
+
+    first->Yspeed = 2 * firstSpeed * CosVminusPhi(firstVector, interaction) * interaction.y()
+                + secondSpeed * SinVminusPhi(secondVector, interaction) * SinVplusPhi(interaction, piHalf);
 }
 
-std::queue<Checker*> Physx::AffectedCheckers(MovingChecker ch)
+void Physx::RecalculateSpeeds(MovingChecker* first, MovingChecker* second)
+{
+    // Вызов функции перерассчета в зависимости от движений шашек
+    // Ситуация, когда обе шашки стоят на месте, невозможна в связи с логикой их выявления
+    if(first->IsNotMoving())
+    {
+        RecalculateSpeedWithNewChecker(second, first);
+        return;
+    }
+
+    if(second->IsNotMoving())
+    {
+        RecalculateSpeedWithNewChecker(first, second);
+        return;
+    }
+
+    RecalculateSpeedsOfMovingCheckers(first, second);
+
+}
+
+std::queue<Checker*> Physx::FindAffectedCheckers(MovingChecker ch)
 {
     std::queue<Checker*> affectedCheckers;
     for(Checker* checker : position->GetBlackCheckers())
@@ -108,6 +145,69 @@ std::queue<Checker*> Physx::AffectedCheckers(MovingChecker ch)
     return affectedCheckers;
 }
 
+void Physx::MoveCheckersByOneStep()
+{
+    for(int i = 0; i < movingCheckers.size(); i++)
+    {
+        movingCheckers[i].checker->IncrementPosition(movingCheckers[i].Xspeed, movingCheckers[i].Yspeed);
+        if(fabs(movingCheckers[i].Xspeed) > speedDecrease)
+            movingCheckers[i].Xspeed -= std::copysign(1, movingCheckers[i].Xspeed)*speedDecrease;
+        else
+            movingCheckers[i].Xspeed = minSpeed;
+        std:: cout << " " << movingCheckers[i].Xspeed;
+
+        if(fabs(movingCheckers[i].Yspeed) > speedDecrease)
+            movingCheckers[i].Yspeed -= std::copysign(1, movingCheckers[i].Yspeed)*speedDecrease;
+        else
+            movingCheckers[i].Yspeed = minSpeed;
+        std:: cout << " " << movingCheckers[i].Yspeed << std::endl;
+    }
+}
+
+void Physx::DeleteNotMovingCheckers()
+{
+    for(int i = 0; i < movingCheckers.size(); i++)
+    {
+        if(!movingCheckers[i].SpeedIsGood(minSpeed))
+        {
+            movingCheckers.erase(movingCheckers.begin() + i);
+            i--;
+        }
+    }
+}
+
+void Physx::PerformCheckersInteraction()
+{
+    int numOfCheckersToPerform = movingCheckers.size();
+    for(int i = 0; i < numOfCheckersToPerform; i++)
+    {
+        std::queue<Checker*> affectedCheckers = FindAffectedCheckers(movingCheckers[i]);
+        while(!affectedCheckers.empty())
+        {
+            // Проверить работу, если проявятся баги - вернуть
+            // Если движущаяся шашка отдала всю свою скорость, на остальные она не влияет
+//            if(movingCheckers[i].IsNotMoving())
+//            {
+//                for(int j = 0; j < affectedCheckers.size(); j++)
+//                    affectedCheckers.pop();
+//                break;
+//            }
+
+            // Проверяем, какой алгоритм пересчета скоростей выбрать
+            if(!CheckerIsMoving(*affectedCheckers.front()))
+            {
+                movingCheckers.push_back(MovingChecker(affectedCheckers.front()));
+                RecalculateSpeeds(&movingCheckers.at(i), &movingCheckers.at(movingCheckers.size() - 1));
+            } else
+            {
+                int num = FindCheckerInMovingCheckers(affectedCheckers.front());
+                RecalculateSpeeds(&movingCheckers.at(i), &movingCheckers.at(num));
+            }
+            affectedCheckers.pop();
+        }
+    }
+}
+
 void Physx::PerformMoves(MovingChecker checker)
 {
     movingCheckers.clear();
@@ -116,66 +216,15 @@ void Physx::PerformMoves(MovingChecker checker)
     int ttt = 0;
     while (movingCheckers.size()!= 0)
     {
-        // Сдвигаем шашки
         std::cout << ttt++ << " (" << movingCheckers.size() << ") " << std::endl;
-        for(int i = 0; i < movingCheckers.size(); i++)
-        {
-            movingCheckers[i].checker->IncrementPosition(movingCheckers[i].Xspeed, movingCheckers[i].Yspeed);
-            if(fabs(movingCheckers[i].Xspeed) > speedDecrease)
-                movingCheckers[i].Xspeed -= std::copysign(1, movingCheckers[i].Xspeed)*speedDecrease;
-            else
-                movingCheckers[i].Xspeed = minSpeed;
-            std:: cout << " " << movingCheckers[i].Xspeed;
-
-            if(fabs(movingCheckers[i].Yspeed) > speedDecrease)
-                movingCheckers[i].Yspeed -= std::copysign(1, movingCheckers[i].Yspeed)*speedDecrease;
-            else
-                movingCheckers[i].Yspeed = minSpeed;
-            std:: cout << " " << movingCheckers[i].Yspeed << std::endl;
-        }
+        // Сдвигаем шашки
+        MoveCheckersByOneStep();
 
         // Удаляем остановившиеся шашки
-        for(int i = 0; i < movingCheckers.size(); i++)
-        {
-            if(!movingCheckers[i].SpeedIsGood(minSpeed))
-            {
-                movingCheckers.erase(movingCheckers.begin() + i);
-                i--;
-            }
-        }
+        DeleteNotMovingCheckers();
 
         // Проверяем столкновения и задаем соответствующие скорости
-        int numOfCheckersToPerform = movingCheckers.size();
-        for(int i = 0; i < numOfCheckersToPerform; i++)
-        {
-            std::queue<Checker*> affectedCheckers = AffectedCheckers(movingCheckers[i]);
-            while(!affectedCheckers.empty())
-            {
-                if(movingCheckers[i].Xspeed == 0 && movingCheckers[i].Yspeed == 0)
-                {
-                    for(int j = 0; j < affectedCheckers.size(); j++)
-                        affectedCheckers.pop();
-                    break;
-                }
-
-                if(!CheckerIsMoving(*affectedCheckers.front()))
-                {
-                    movingCheckers.push_back(MovingChecker(affectedCheckers.front()));
-                    affectedCheckers.pop();
-                    RecalculateSpeeds(&movingCheckers.at(i), &movingCheckers.at(movingCheckers.size() - 1));
-                } else
-                {
-                    for(MovingChecker c : movingCheckers)
-                    {
-                        if(c.checker == affectedCheckers.front())
-                        {
-                            RecalculateSpeeds(&movingCheckers.at(i), &c);
-                            break;
-                        }
-                    }
-                }
-            }
-        }
+        PerformCheckersInteraction();
     }
 
 }

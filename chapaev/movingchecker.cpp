@@ -22,3 +22,8 @@ bool MovingChecker::SpeedIsGood(float speed)
     return ans;
 }
 
+bool MovingChecker::IsNotMoving()
+{
+    return (this->Xspeed == 0 && this->Yspeed == 0);
+}
+
