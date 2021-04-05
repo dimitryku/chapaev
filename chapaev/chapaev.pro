@@ -29,6 +29,7 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     movingchecker.cpp \
+    physx.cpp \
         startgamedata.cpp \
     game.cpp
 
@@ -37,6 +38,7 @@ HEADERS += \
         gameposition.h \
         mainwindow.h \
     movingchecker.h \
+    physx.h \
         startgamedata.h \
     game.h
 

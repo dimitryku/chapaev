@@ -142,13 +142,14 @@ void Game::PerformMoves(MovingChecker checker)
         for(int i = 0; i < movingCheckers.size(); i++)
         {
             movingCheckers[i].checker->IncrementPosition(movingCheckers[i].Xspeed, movingCheckers[i].Yspeed);
-            if(movingCheckers[i].Xspeed > speedDecrease)
-                movingCheckers[i].Xspeed -= speedDecrease;
+            if(fabs(movingCheckers[i].Xspeed) > speedDecrease)
+                movingCheckers[i].Xspeed -= std::copysign(1, movingCheckers[i].Xspeed)*speedDecrease;
             else
                 movingCheckers[i].Xspeed = minSpeed;
             std:: cout << " " << movingCheckers[i].Xspeed;
-            if(movingCheckers[i].Xspeed > speedDecrease)
-                movingCheckers[i].Yspeed -= speedDecrease;
+
+            if(fabs(movingCheckers[i].Yspeed) > speedDecrease)
+                movingCheckers[i].Yspeed -= std::copysign(1, movingCheckers[i].Yspeed)*speedDecrease;
             else
                 movingCheckers[i].Yspeed = minSpeed;
             std:: cout << " " << movingCheckers[i].Yspeed << std::endl;
