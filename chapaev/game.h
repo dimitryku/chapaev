@@ -5,29 +5,24 @@
 #include "gameposition.h"
 #include "startgamedata.h"
 #include "queue"
+#include "physx.h"
 
 class Game
 {
 private:
-    float minSpeed;
-    float speedDecrease;
-    std::vector<MovingChecker> movingCheckers;
     int WhitePoints;
     int BlackPoints;
     bool WhitesTurn;
     GamePosition* position;
-    void RecalculateSpeedWithNewChecker(MovingChecker* movingChecker, MovingChecker* standingChecker);
 
 public:
+    Physx* physx;
     Game();
     void InitGameData();
     bool IsWhitesTurn();
     void ChangeTurn();
     GamePosition* GetGamePosition();
-    void PerformMoves(MovingChecker checker);
-    bool CheckerIsMoving(Checker ch);
-    void RecalculateSpeeds(MovingChecker* first, MovingChecker* second);
-    std::queue<Checker*> AffectedCheckers(MovingChecker ch);
+
     ~Game();
 
 };
