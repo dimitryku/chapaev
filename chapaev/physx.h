@@ -11,7 +11,6 @@
 class Physx
 {
 private:
-    float minSpeed;
     float speedDecrease;
     GamePosition* position;
     std::vector<MovingChecker> movingCheckers;

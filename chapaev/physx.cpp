@@ -3,7 +3,6 @@
 
 Physx::Physx(GamePosition* pos)
 {
-    minSpeed = 0;
     speedDecrease = 0.3;
     position = pos;
 }
@@ -105,13 +104,13 @@ void Physx::RecalculateSpeeds(MovingChecker* first, MovingChecker* second)
 {
     // Вызов функции перерассчета в зависимости от движений шашек
     // Ситуация, когда обе шашки стоят на месте, невозможна в связи с логикой их выявления
-    if(first->IsNotMoving())
+    if(!first->IsMoving())
     {
         RecalculateSpeedWithNewChecker(second, first);
         return;
     }
 
-    if(second->IsNotMoving())
+    if(!second->IsMoving())
     {
         RecalculateSpeedWithNewChecker(first, second);
         return;
@@ -153,13 +152,13 @@ void Physx::MoveCheckersByOneStep()
         if(fabs(movingCheckers[i].Xspeed) > speedDecrease)
             movingCheckers[i].Xspeed -= std::copysign(1, movingCheckers[i].Xspeed)*speedDecrease;
         else
-            movingCheckers[i].Xspeed = minSpeed;
+            movingCheckers[i].Xspeed = 0;
         std:: cout << " " << movingCheckers[i].Xspeed;
 
         if(fabs(movingCheckers[i].Yspeed) > speedDecrease)
             movingCheckers[i].Yspeed -= std::copysign(1, movingCheckers[i].Yspeed)*speedDecrease;
         else
-            movingCheckers[i].Yspeed = minSpeed;
+            movingCheckers[i].Yspeed = 0;
         std:: cout << " " << movingCheckers[i].Yspeed << std::endl;
     }
 }
@@ -168,7 +167,7 @@ void Physx::DeleteNotMovingCheckers()
 {
     for(int i = 0; i < movingCheckers.size(); i++)
     {
-        if(!movingCheckers[i].SpeedIsGood(minSpeed))
+        if(!movingCheckers[i].IsMoving())
         {
             movingCheckers.erase(movingCheckers.begin() + i);
             i--;

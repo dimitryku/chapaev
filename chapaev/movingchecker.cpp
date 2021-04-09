@@ -15,15 +15,9 @@ MovingChecker::MovingChecker(Checker *c, float Xspeed, float Yspeed)
     this->Yspeed = Yspeed;
 }
 
-bool MovingChecker::SpeedIsGood(float speed)
+bool MovingChecker::IsMoving()
 {
-    float curSpeed = (QVector2D(Xspeed, Yspeed)).length();
-    bool ans = (fabs(fabs(Xspeed) - speed) > 0.001 && fabs(fabs(Yspeed) - speed) > 0.001);
+    bool ans = (fabs(Xspeed) > 0.001 && fabs(Yspeed)> 0.001);
     return ans;
-}
-
-bool MovingChecker::IsNotMoving()
-{
-    return (this->Xspeed == 0 && this->Yspeed == 0);
 }
 
