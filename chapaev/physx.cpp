@@ -126,7 +126,7 @@ std::queue<Checker*> Physx::FindAffectedCheckers(MovingChecker ch)
     for(Checker* checker : position->GetBlackCheckers())
     {
         if(!checker->GetOutOfGame()) {
-            if(checker->GetPosition().distanceToPoint(ch.checker->GetPosition()) <= 2*Checker::radius
+            if(checker->GetPosition().distanceToPoint(ch.checker->GetPosition()) <= 2*ch.checker->GetRadius()
                     && checker->GetPosition().distanceToPoint(ch.checker->GetPosition()) > 0.001)
                 affectedCheckers.push(&*checker);
         }
@@ -135,7 +135,7 @@ std::queue<Checker*> Physx::FindAffectedCheckers(MovingChecker ch)
     for(Checker* checker : position->GetWhiteCheckers())
     {
         if(!checker->GetOutOfGame()) {
-            if(checker->GetPosition().distanceToPoint(ch.checker->GetPosition()) <= 2*Checker::radius
+            if(checker->GetPosition().distanceToPoint(ch.checker->GetPosition()) <= 2*ch.checker->GetRadius()
                     && checker->GetPosition().distanceToPoint(ch.checker->GetPosition()) > 0.001)
                 affectedCheckers.push(&*checker);
         }

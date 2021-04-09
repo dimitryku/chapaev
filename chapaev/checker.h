@@ -9,15 +9,17 @@ class Checker
 private:
     QVector2D position;
     bool isOutOfGame;
+    float radius;
 
 public:
-    static float radius;
     explicit Checker();
     QVector2D GetPosition();
     void SetPosition(QVector2D position);
     void SetOutOfGame (bool t);
     void IncrementPosition(float x, float y);
     bool GetOutOfGame();
+    void SetRadius(float radius);
+    float GetRadius();
     Checker(Checker& checker);
 
 signals:
