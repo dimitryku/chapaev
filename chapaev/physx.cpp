@@ -123,16 +123,7 @@ void Physx::RecalculateSpeeds(MovingChecker* first, MovingChecker* second)
 std::queue<Checker*> Physx::FindAffectedCheckers(MovingChecker ch)
 {
     std::queue<Checker*> affectedCheckers;
-    for(Checker* checker : position->GetBlackCheckers())
-    {
-        if(!checker->GetOutOfGame()) {
-            if(checker->GetPosition().distanceToPoint(ch.checker->GetPosition()) <= 2*ch.checker->GetRadius()
-                    && checker->GetPosition().distanceToPoint(ch.checker->GetPosition()) > 0.001)
-                affectedCheckers.push(&*checker);
-        }
-    }
-
-    for(Checker* checker : position->GetWhiteCheckers())
+    for(Checker* checker : position->GetCheckers())
     {
         if(!checker->GetOutOfGame()) {
             if(checker->GetPosition().distanceToPoint(ch.checker->GetPosition()) <= 2*ch.checker->GetRadius()

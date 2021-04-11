@@ -6,8 +6,8 @@
 class StartGameData
 {
 private:
-    int BlackCheckersQuantity;
-    int WhiteCheckersQuantity;
+    int blackCheckersQuantity;
+    int whiteCheckersQuantity;
     QVector2D *BlackCheckersPos;
     QVector2D *WhiteCheckersPos;
 
@@ -15,9 +15,7 @@ private:
 
 public:
     StartGameData();
-    int GetBlackCheckersQuantity();
-    int GetWhiteCheckersQuantity();
-
+    int GetCheckersQuantity();
     QVector2D *GetWhiteCheckersPositions();
     QVector2D *GetBlackCheckersPositions();
     ~StartGameData();

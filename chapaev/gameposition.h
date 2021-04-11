@@ -7,13 +7,11 @@
 class GamePosition
 {
 private:
-    std::vector<Checker*> WhiteCheckers;
-    std::vector<Checker*> BlackCheckers;
+    std::vector<Checker*> Checkers;
 public:
     GamePosition();
     void ResetGamePosition();
-    std::vector<Checker*> GetWhiteCheckers();
-    std::vector<Checker*> GetBlackCheckers();
+    std::vector<Checker*> GetCheckers();
     ~GamePosition();
 };
 
