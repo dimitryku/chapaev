@@ -25,6 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         checker.cpp \
+    checkervievstyle.cpp \
         gameposition.cpp \
         main.cpp \
         mainwindow.cpp \
@@ -35,6 +36,7 @@ SOURCES += \
 
 HEADERS += \
         checker.h \
+    checkervievstyle.h \
         gameposition.h \
         mainwindow.h \
     movingchecker.h \
