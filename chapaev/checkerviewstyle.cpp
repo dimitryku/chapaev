@@ -1,7 +1,6 @@
-#include "checkervievstyle.h"
+#include "checkerviewstyle.h"
 
-
-CheckerVievstyle::CheckerVievstyle(BattleSide side)
+CheckerViewstyle::CheckerViewstyle(BattleSide side)
 {
     this->side = side;
     this->pen = QPen(Qt::black);
@@ -11,7 +10,7 @@ CheckerVievstyle::CheckerVievstyle(BattleSide side)
         this->color = QColor(Qt::lightGray);
 }
 
-BattleSide CheckerVievstyle::GetSide()
+BattleSide CheckerViewstyle::GetSide()
 {
     return this->side;
 }

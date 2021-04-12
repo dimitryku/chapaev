@@ -8,19 +8,10 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    //this->setFixedHeight(XsceneSize);
-    //this->setFixedWidth(YsceneSize);
     ui->setupUi(this);
     view = new GameView();
     ui->gridLayout->addWidget(view);
-    //ui->graphicsView->setFixedSize(playgroundSize, playgroundSize);
 }
-
-MainWindow::~MainWindow()
-{
-    delete ui;
-}
-
 
 void MainWindow::on_NewGameButton_clicked()
 {
@@ -33,4 +24,14 @@ void MainWindow::on_NewGameButton_clicked()
         //TODO restart game
         ui->statusBar->showMessage("Игра сброшена");
     }
+}
+
+GameView *MainWindow::GetView()
+{
+    return view;
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
 }

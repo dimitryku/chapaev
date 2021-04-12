@@ -6,6 +6,7 @@
 #include "startgamedata.h"
 #include "queue"
 #include "physx.h"
+#include "gameview.h"
 
 class Game
 {
@@ -14,10 +15,11 @@ private:
     int BlackPoints;
     bool WhitesTurn;
     GamePosition* position;
+    GameView* view;
 
 public:
     Physx* physx;
-    Game();
+    Game(GameView* v);
     void InitGameData();
     bool IsWhitesTurn();
     void ChangeTurn();

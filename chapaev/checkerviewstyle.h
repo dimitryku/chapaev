@@ -8,7 +8,7 @@ enum BattleSide {
     black
 };
 
-class CheckerVievstyle
+class CheckerViewstyle
 {
 private:
     BattleSide side;
@@ -16,7 +16,7 @@ public:
     QPen pen;
     QColor color;
 
-    CheckerVievstyle(BattleSide side);
+    CheckerViewstyle(BattleSide side);
     BattleSide GetSide();
 };
 

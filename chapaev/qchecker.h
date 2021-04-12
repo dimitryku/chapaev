@@ -1,16 +1,20 @@
 #ifndef QCHECKER_H
 #define QCHECKER_H
 #include "checker.h"
-#include "checkervievstyle.h"
+#include "checkerviewstyle.h"
+#include "QGraphicsItem"
 
 
-class qChecker
+class qChecker : QGraphicsItem
 {
 private:
     Checker* checker;
-    CheckerVievstyle* style;
+    CheckerViewstyle* style;
+
 public:
-    qChecker();
+    qChecker(Checker* ch, CheckerViewstyle* st);
+    Checker* GetChecker() const;
+    CheckerViewstyle* GetViewStyle() const;
 
 };
 
