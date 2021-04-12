@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <gameview.h>
 
 namespace Ui {
 class MainWindow;
@@ -19,6 +20,7 @@ private slots:
     void on_NewGameButton_clicked();
 
 private:
+    GameView* view;
     Ui::MainWindow *ui;
     int XsceneSize = 700; // Полный размер сцены по оси х
     int YsceneSize = 700;  // Полный размер сцены по оси у

@@ -23,7 +23,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QGraphicsView" name="graphicsView"/>
+     <layout class="QGridLayout" name="gridLayout"/>
     </item>
    </layout>
   </widget>

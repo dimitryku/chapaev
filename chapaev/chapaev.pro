@@ -27,6 +27,7 @@ SOURCES += \
         checker.cpp \
     checkervievstyle.cpp \
         gameposition.cpp \
+    gameview.cpp \
         main.cpp \
         mainwindow.cpp \
     movingchecker.cpp \
@@ -39,6 +40,7 @@ HEADERS += \
         checker.h \
     checkervievstyle.h \
         gameposition.h \
+    gameview.h \
         mainwindow.h \
     movingchecker.h \
     physx.h \
