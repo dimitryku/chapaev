@@ -2,21 +2,20 @@
 #include "math.h"
 #include <iostream>
 
-Game::Game(GameView *v)
+Game::Game()
 {
-    WhitesTurn = true;
-    BlackPoints = 0;
-    WhitePoints = 0;
-    position = new GamePosition();
-    physx = new Physx(position);
-    view = v;
+    this->WhitesTurn = true;
+    this->BlackPoints = 0;
+    this->WhitePoints = 0;
+    this->position = new GamePosition();
+    this->physx = new Physx(position);
 }
 
 void Game::InitGameData()
 {
-    WhitesTurn = true;
-    BlackPoints = 0;
-    WhitePoints = 0;
+    this->WhitesTurn = true;
+    this->BlackPoints = 0;
+    this->WhitePoints = 0;
 }
 
 bool Game::IsWhitesTurn(){ return WhitesTurn; }
@@ -31,4 +30,5 @@ GamePosition *Game::GetGamePosition()
 Game::~Game()
 {
     delete position;
+    delete physx;
 }

@@ -7,7 +7,7 @@
 class GamePosition
 {
 private:
-    std::vector<Checker*> Checkers;
+    std::vector<Checker*> checkers;
 public:
     GamePosition();
     void ResetGamePosition();

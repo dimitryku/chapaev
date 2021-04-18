@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <gameview.h>
+#include "game.h"
 
 namespace Ui {
 class MainWindow;
@@ -14,6 +15,7 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
+    void SetGame(Game* game);
     GameView *GetView();
     ~MainWindow();
 
@@ -22,10 +24,11 @@ private slots:
 
 private:
     GameView* view;
+    Game* game;
     Ui::MainWindow *ui;
-    int XsceneSize = 700; // Полный размер сцены по оси х
-    int YsceneSize = 700;  // Полный размер сцены по оси у
-    int playgroundSize = 500; // Размер игрового поля
+//    int XsceneSize = 700; // Полный размер сцены по оси х
+//    int YsceneSize = 700;  // Полный размер сцены по оси у
+//    int playgroundSize = 500; // Размер игрового поля
 };
 
 #endif // MAINWINDOW_H

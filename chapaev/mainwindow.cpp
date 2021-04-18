@@ -13,6 +13,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->gridLayout->addWidget(view);
 }
 
+void MainWindow::SetGame(Game* game)
+{
+    this->game = game;
+}
+
 void MainWindow::on_NewGameButton_clicked()
 {
     QMessageBox *mb = new QMessageBox("Внимание!", "Начать новую игру? Прогресс будет потерян!", QMessageBox::Information, QMessageBox::Yes,

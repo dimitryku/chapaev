@@ -2,22 +2,18 @@
 #define CHECKERVIEVSTYLE_H
 #include "QPen"
 #include "QColor"
-
-enum BattleSide {
-    white,
-    black
-};
+#include "QPainter"
+#include "BattleSide.h"
 
 class CheckerViewstyle
 {
 private:
-    BattleSide side;
 public:
+    CheckerViewstyle(BattleSide side);
     QPen pen;
     QColor color;
+    QPainter* painter;
 
-    CheckerViewstyle(BattleSide side);
-    BattleSide GetSide();
 };
 
 #endif // CHECKERVIEVSTYLE_H

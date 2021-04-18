@@ -19,7 +19,7 @@ private:
 
 public:
     Physx* physx;
-    Game(GameView* v);
+    Game();
     void InitGameData();
     bool IsWhitesTurn();
     void ChangeTurn();

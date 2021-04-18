@@ -33,10 +33,12 @@ SOURCES += \
     movingchecker.cpp \
     physx.cpp \
     qchecker.cpp \
+    qcheckerholder.cpp \
         startgamedata.cpp \
     game.cpp
 
 HEADERS += \
+    BattleSide.h \
         checker.h \
     checkerviewstyle.h \
         gameposition.h \
@@ -45,6 +47,7 @@ HEADERS += \
     movingchecker.h \
     physx.h \
     qchecker.h \
+    qcheckerholder.h \
         startgamedata.h \
     game.h
 

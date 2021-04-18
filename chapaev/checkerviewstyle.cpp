@@ -2,15 +2,14 @@
 
 CheckerViewstyle::CheckerViewstyle(BattleSide side)
 {
-    this->side = side;
     this->pen = QPen(Qt::black);
     if(side == BattleSide::black)
         this->color = QColor(Qt::darkRed);
-    if(side == BattleSide::white)
+    else
         this->color = QColor(Qt::lightGray);
+    painter = new QPainter();
+    painter->setPen(pen);
+    painter->setBrush(color);
+
 }
 
-BattleSide CheckerViewstyle::GetSide()
-{
-    return this->side;
-}

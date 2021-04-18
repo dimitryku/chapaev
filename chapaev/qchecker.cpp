@@ -1,10 +1,11 @@
 #include "qchecker.h"
 
 
-qChecker::qChecker(Checker *ch, CheckerViewstyle *st)
+qChecker::qChecker(Checker *checker, CheckerViewstyle *style, BattleSide side)
 {
-    checker = ch;
-    style = st;
+    this->checker = checker;
+    this->style = style;
+    this->side = side;
 }
 
 Checker *qChecker::GetChecker() const
@@ -15,6 +16,11 @@ Checker *qChecker::GetChecker() const
 CheckerViewstyle *qChecker::GetViewStyle() const
 {
     return style;
+}
+
+BattleSide qChecker::GetBatleSide() const
+{
+    return side;
 }
 
 
