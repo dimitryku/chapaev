@@ -2,17 +2,17 @@
 #define CHECKERVIEVSTYLE_H
 #include "QPen"
 #include "QColor"
-#include "QPainter"
+#include "QBrush"
 #include "BattleSide.h"
 
-class CheckerViewstyle
+class CheckerViewStyle
 {
 private:
 public:
-    CheckerViewstyle(BattleSide side);
+    CheckerViewStyle(BattleSide side);
     QPen pen;
     QColor color;
-    QPainter* painter;
+    QBrush brush;
 
 };
 

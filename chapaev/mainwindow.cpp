@@ -4,18 +4,14 @@
 #include <QMessageBox>
 #include "gameposition.h"
 
-MainWindow::MainWindow(QWidget *parent) :
+MainWindow::MainWindow(QWidget *parent, Game* game) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    view = new GameView();
-    ui->gridLayout->addWidget(view);
-}
-
-void MainWindow::SetGame(Game* game)
-{
     this->game = game;
+    view = new GameView(this, game);
+    ui->gridLayout->addWidget(view);
 }
 
 void MainWindow::on_NewGameButton_clicked()

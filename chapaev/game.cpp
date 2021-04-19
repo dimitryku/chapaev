@@ -22,7 +22,7 @@ bool Game::IsWhitesTurn(){ return WhitesTurn; }
 
 void Game::ChangeTurn(){ WhitesTurn = !WhitesTurn; }
 
-GamePosition *Game::GetGamePosition()
+GamePosition* Game::GetGamePosition()
 {
     return position;
 }

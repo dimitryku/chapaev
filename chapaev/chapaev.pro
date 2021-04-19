@@ -28,13 +28,13 @@ SOURCES += \
     checkerviewstyle.cpp \
         gameposition.cpp \
     gameview.cpp \
+    initgamedata.cpp \
         main.cpp \
         mainwindow.cpp \
     movingchecker.cpp \
     physx.cpp \
     qchecker.cpp \
     qcheckerholder.cpp \
-        startgamedata.cpp \
     game.cpp
 
 HEADERS += \
@@ -43,12 +43,12 @@ HEADERS += \
     checkerviewstyle.h \
         gameposition.h \
     gameview.h \
+    initgamedata.h \
         mainwindow.h \
     movingchecker.h \
     physx.h \
     qchecker.h \
     qcheckerholder.h \
-        startgamedata.h \
     game.h
 
 FORMS += \

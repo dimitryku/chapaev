@@ -1,14 +1,20 @@
 #ifndef QCHECKERHOLDER_H
 #define QCHECKERHOLDER_H
+
 #include "qchecker.h"
 #include <vector>
+#include "initgamedata.h"
+#include "game.h"
+
+class Game;
 
 class qCheckerHolder
 {
 private:
-    std::vector<qChecker> checkers;
+    std::vector<qChecker*> checkers;
 public:
-    qCheckerHolder();
+    explicit qCheckerHolder(Game* game);
+    std::vector<qChecker*> GetCheckers() const;
 };
 
 #endif // QCHECKERHOLDER_H

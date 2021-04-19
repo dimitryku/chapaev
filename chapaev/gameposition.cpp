@@ -9,32 +9,29 @@ GamePosition::GamePosition()
 
 void GamePosition::ResetGamePosition()
 {
-    StartGameData * data = new StartGameData();
-    unsigned int checkersNumber = data->GetCheckersQuantity();
+    unsigned int checkersNumber = InitGameData::GetInstance()->GetCheckersQuantity();
+    unsigned int bCheckersNumber = InitGameData::GetInstance()->GetBlackCheckersQuantity();
+    unsigned int wCheckersNumber = InitGameData::GetInstance()->GetWhiteCheckersQuantity();
 
-    // Задаем нужное количество белых
+    // Задаем нужное количество
     if(checkers.size() != checkersNumber)
         checkers.resize(checkersNumber);
 
     // Заполнение начальной информации шашек
-    for(unsigned int i = 0; i < checkersNumber; i++)
+    for(unsigned int i = 0; i < wCheckersNumber; i++)
     {
         if(checkers[i] == nullptr)
             checkers[i] = new Checker();
-        checkers[i]->SetPosition(data->GetWhiteCheckersPositions()[i]);
-        // TODO: добавить создание вьюх
+        checkers[i]->SetPosition(InitGameData::GetInstance()->GetWhiteCheckersPositions()[i]);
     }
 
     // Заполнение начальной информации шашек
-    for(unsigned int i = 0; i < checkersNumber; i++)
+    for(unsigned int i = 0; i < bCheckersNumber; i++)
     {
-        if(checkers[i] == nullptr)
-            checkers[i] = new Checker();
-        checkers[i]->SetPosition(data->GetBlackCheckersPositions()[i]);
-        // TODO: добавить создание вьюх
+        if(checkers[i + wCheckersNumber] == nullptr)
+            checkers[i + wCheckersNumber] = new Checker();
+        checkers[i + wCheckersNumber]->SetPosition(InitGameData::GetInstance()->GetBlackCheckersPositions()[i]);
     }
-    delete data;
-
 }
 
 std::vector<Checker *> GamePosition::GetCheckers()

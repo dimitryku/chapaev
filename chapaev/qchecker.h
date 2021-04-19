@@ -3,19 +3,21 @@
 #include "checker.h"
 #include "checkerviewstyle.h"
 #include "QGraphicsItem"
+#include <QPainter>
 
-class qChecker : public QGraphicsItem, public QObject
+class qChecker : public QGraphicsItem
 {
-    //Q_OBJECT
 private:
     Checker* checker;
-    CheckerViewstyle* style;
+    CheckerViewStyle* style;
     BattleSide side;
+    QRectF boundingRect() const;
+    void paint(QPainter* painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
 public:
-    qChecker(Checker *checker, CheckerViewstyle *style, BattleSide side);
+    qChecker(Checker *checker, CheckerViewStyle *style, BattleSide side);
     Checker* GetChecker() const;
-    CheckerViewstyle* GetViewStyle() const;
+    CheckerViewStyle* GetViewStyle() const;
     BattleSide GetBatleSide() const;
 
 };

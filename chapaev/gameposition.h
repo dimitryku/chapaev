@@ -1,8 +1,8 @@
 #ifndef GAMEPOSITION_H
 #define GAMEPOSITION_H
 #include <vector>
-#include <checker.h>
-#include "startgamedata.h"
+#include "checker.h"
+#include "initgamedata.h"
 
 class GamePosition
 {

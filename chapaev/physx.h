@@ -1,12 +1,13 @@
 #ifndef PHYSX_H
 #define PHYSX_H
 #include "movingchecker.h"
-#include "vector"
+#include <vector>
 #include "math.h"
 #include "gameposition.h"
-#include "startgamedata.h"
-#include "queue"
+#include "initgamedata.h"
+#include <queue>
 
+class GamePosition;
 
 class Physx
 {

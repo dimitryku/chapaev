@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <gameview.h>
+#include "gameview.h"
 #include "game.h"
 
 namespace Ui {
@@ -14,8 +14,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
-    void SetGame(Game* game);
+    explicit MainWindow(QWidget *parent = 0, Game* game = new Game());
     GameView *GetView();
     ~MainWindow();
 
