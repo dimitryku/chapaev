@@ -52,6 +52,4 @@ void GameView::SetBoard(int num)
                 else
                     board->addToGroup(scene->addRect(rectSize*i, rectSize*j, rectSize, rectSize, QPen(Qt::white), QBrush(QColor(255, 255, 231))));
             }
-
-
 }

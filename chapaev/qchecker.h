@@ -14,6 +14,8 @@ private:
     QRectF boundingRect() const;
     void paint(QPainter* painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
+signals:
+
 public:
     qChecker(Checker *checker, CheckerViewStyle *style, BattleSide side);
     Checker* GetChecker() const;
