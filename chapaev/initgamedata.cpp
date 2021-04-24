@@ -19,8 +19,8 @@ InitGameData::InitGameData()
 
     for(int i = 0; i < blackCheckersQuantity; i++)
     {
-        blackCheckersPos[i].setX(i * GameView::rectSize);
-        blackCheckersPos[i].setY(0);
+        blackCheckersPos[i].setX(i * GameView::rectSize + GameView::rectSize/2);
+        blackCheckersPos[i].setY(GameView::rectSize/2);
         //std::cout << "bc " << blackCheckersPos[i].x() << " " << blackCheckersPos[i].y() << std::endl;
     }
 

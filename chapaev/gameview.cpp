@@ -28,17 +28,17 @@ GameView::GameView(QObject *parent, Game* game) : QGraphicsView()
 
 void GameView::SetCheckers(Game* game, int num)
 {
-    float bound = (rectSize - 2*Checker::radius) / 2.0;
+    //float bound = (rectSize - 2*Checker::radius) / 2.0;
     checkersHolder = new qCheckerHolder(game);
     for(int i = 0; i < checkersHolder->GetCheckers().size(); i++)
     {
-        int r = Checker::radius;
-        int x = checkersHolder->GetCheckers()[i]->GetChecker()->GetPosition().x();
-        int y = checkersHolder->GetCheckers()[i]->GetChecker()->GetPosition().y();
-        //scene->addItem(checkersHolder->GetCheckers()[i]);
-        checkers->addToGroup(scene->addEllipse(x + bound, y + bound, 2*r, 2*r,
-                                               checkersHolder->GetCheckers()[i]->GetViewStyle()->pen,
-                                               checkersHolder->GetCheckers()[i]->GetViewStyle()->brush));
+        //int r = Checker::radius;
+        //int x = checkersHolder->GetCheckers()[i]->GetChecker()->GetPosition().x();
+        //int y = checkersHolder->GetCheckers()[i]->GetChecker()->GetPosition().y();
+        scene->addItem(checkersHolder->GetCheckers()[i]);
+//        checkers->addToGroup(scene->addEllipse(x + bound, y + bound, 2*r, 2*r,
+//                                               checkersHolder->GetCheckers()[i]->GetViewStyle()->pen,
+//                                               checkersHolder->GetCheckers()[i]->GetViewStyle()->brush));
     }
 }
 
