@@ -1,4 +1,5 @@
 #include "qchecker.h"
+#include <iostream>
 
 
 QRectF qChecker::boundingRect() const
@@ -44,4 +45,19 @@ BattleSide qChecker::GetBatleSide() const
     return side;
 }
 
+void qChecker::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    //std::cout << "pressed checker" << std::endl;
+    //mousePos = event->buttonDownScenePos(Qt::LeftButton);
+    //std::cout << std::endl << mousePos.x() << " " << mousePos.y() << " : ";
+}
 
+void qChecker::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    //std::cout << "released checker" << std::endl;
+    QPointF endPos = event->buttonDownScenePos(Qt::LeftButton);
+    std::cout << endPos.x() << " " << endPos.y() << std::endl;
+    endPos -= mousePos;
+    std::cout << endPos.x() << " " << endPos.y() << std::endl;
+    //emit
+}

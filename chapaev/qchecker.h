@@ -4,6 +4,7 @@
 #include "checkerviewstyle.h"
 #include "QGraphicsItem"
 #include <QPainter>
+#include <QGraphicsSceneMouseEvent>
 
 class qChecker : public QGraphicsItem
 {
@@ -13,6 +14,7 @@ private:
     BattleSide side;
     QRectF boundingRect() const;
     void paint(QPainter* painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    QPointF mousePos;
 
 signals:
 
@@ -21,6 +23,11 @@ public:
     Checker* GetChecker() const;
     CheckerViewStyle* GetViewStyle() const;
     BattleSide GetBatleSide() const;
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+
+protected:
+
 
 };
 
