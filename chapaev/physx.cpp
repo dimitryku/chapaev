@@ -141,13 +141,13 @@ void Physx::MoveCheckersByOneStep()
     {
         movingCheckers[i].checker->IncrementPosition(movingCheckers[i].Xspeed, movingCheckers[i].Yspeed);
         if(fabs(movingCheckers[i].Xspeed) > speedDecrease)
-            movingCheckers[i].Xspeed -= std::copysign(1, movingCheckers[i].Xspeed)*speedDecrease;
+            movingCheckers[i].Xspeed -= std::copysign(1, movingCheckers[i].Xspeed) * speedDecrease;
         else
             movingCheckers[i].Xspeed = 0;
         std:: cout << " " << movingCheckers[i].Xspeed;
 
         if(fabs(movingCheckers[i].Yspeed) > speedDecrease)
-            movingCheckers[i].Yspeed -= std::copysign(1, movingCheckers[i].Yspeed)*speedDecrease;
+            movingCheckers[i].Yspeed -= std::copysign(1, movingCheckers[i].Yspeed) * speedDecrease;
         else
             movingCheckers[i].Yspeed = 0;
         std:: cout << " " << movingCheckers[i].Yspeed << std::endl;
