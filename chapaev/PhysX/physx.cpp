@@ -32,8 +32,8 @@ int Physx::FindCheckerInMovingCheckers(Checker* checker)
 
 void Physx::RecalculateSpeedWithNewChecker(MovingChecker *movingChecker, MovingChecker *standingChecker)
 {
-    // Сохраняем скорость движущейся шашшшки в удобном формате
-    QVector2D oldSpeed = QVector2D(movingChecker->Xspeed, movingChecker->Yspeed);
+    // Сохраняем скорость движущейся шашки в удобном формате
+    QVector2D oldSpeed = QVector2D(movingChecker->getSpeed().x(), movingChecker->getSpeed().y());
     // создаем вектор, по которому полетит стоящая шашка и нормируем его
     QVector2D strikeVector = QVector2D(standingChecker->checker->GetPosition().x() - movingChecker->checker->GetPosition().x(),
                                        standingChecker->checker->GetPosition().y() - movingChecker->checker->GetPosition().y());
@@ -44,10 +44,10 @@ void Physx::RecalculateSpeedWithNewChecker(MovingChecker *movingChecker, MovingC
     // Пересчитываем вектора и записываем в шашки
     float newSpeed = oldSpeed.length() * strikeAngleCos;
     strikeVector *=(newSpeed);
-    standingChecker->Xspeed = strikeVector.x();
-    standingChecker->Yspeed = strikeVector.y();
-    movingChecker->Xspeed = oldSpeed.x() - strikeVector.x();
-    movingChecker->Yspeed = oldSpeed.y() - strikeVector.y();
+    standingChecker->getSpeed().x() = strikeVector.x();
+    standingChecker->getSpeed().y() = strikeVector.y();
+    movingChecker->getSpeed().x() = oldSpeed.x() - strikeVector.x();
+    movingChecker->getSpeed().y() = oldSpeed.y() - strikeVector.y();
 }
 
 float Physx::SinVminusPhi(QVector2D V, QVector2D phi)
@@ -72,8 +72,8 @@ float Physx::SinVplusPhi(QVector2D V, QVector2D phi)
 
 void Physx::RecalculateSpeedsOfMovingCheckers(MovingChecker* first, MovingChecker* second)
 {
-    QVector2D firstVector(first->Xspeed, first->Yspeed);
-    QVector2D secondVector(second->Xspeed, second->Yspeed);
+    QVector2D firstVector(first->getSpeed().x(), first->getSpeed().y());
+    QVector2D secondVector(second->getSpeed().x(), second->getSpeed().y());
     float firstSpeed = firstVector.length();
     float secondSpeed = secondVector.length();
     firstVector.normalize();
@@ -139,18 +139,18 @@ void Physx::MoveCheckersByOneStep()
 {
     for(int i = 0; i < movingCheckers.size(); i++)
     {
-        movingCheckers[i].checker->IncrementPosition(movingCheckers[i].Xspeed, movingCheckers[i].Yspeed);
-        if(fabs(movingCheckers[i].Xspeed) > speedDecrease)
-            movingCheckers[i].Xspeed -= std::copysign(1, movingCheckers[i].Xspeed) * speedDecrease;
+        movingCheckers[i].checker->IncrementPosition(movingCheckers[i].getSpeed().x(), movingCheckers[i].getSpeed().y());
+        if(fabs(movingCheckers[i].getSpeed().x()) > speedDecrease)
+            movingCheckers[i].Xspeed -= std::copysign(1, movingCheckers[i].getSpeed().x()) * speedDecrease;
         else
             movingCheckers[i].Xspeed = 0;
-        std:: cout << " " << movingCheckers[i].Xspeed;
+        std:: cout << " " << movingCheckers[i].getSpeed().x();
 
         if(fabs(movingCheckers[i].Yspeed) > speedDecrease)
-            movingCheckers[i].Yspeed -= std::copysign(1, movingCheckers[i].Yspeed) * speedDecrease;
+            movingCheckers[i].Yspeed -= std::copysign(1, movingCheckers[i].getSpeed().y()) * speedDecrease;
         else
             movingCheckers[i].Yspeed = 0;
-        std:: cout << " " << movingCheckers[i].Yspeed << std::endl;
+        std:: cout << " " << movingCheckers[i].getSpeed().y() << std::endl;
     }
 }
 
