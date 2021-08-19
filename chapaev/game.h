@@ -3,10 +3,10 @@
 
 #include "movingchecker.h"
 #include "vector"
-#include "gameposition.h"
+#include "PhysX/gameposition.h"
 #include "initgamedata.h"
 #include "queue"
-#include "physx.h"
+#include "PhysX/physx.h"
 #include "gameview.h"
 
 class GamePosition;

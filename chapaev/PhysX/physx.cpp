@@ -146,7 +146,7 @@ void Physx::MoveCheckersByOneStep()
             movingCheckers[i].Xspeed = 0;
         std:: cout << " " << movingCheckers[i].getSpeed().x();
 
-        if(fabs(movingCheckers[i].Yspeed) > speedDecrease)
+        if(fabs(movingCheckers[i].getSpeed().y()) > speedDecrease)
             movingCheckers[i].Yspeed -= std::copysign(1, movingCheckers[i].getSpeed().y()) * speedDecrease;
         else
             movingCheckers[i].Yspeed = 0;
