@@ -26,3 +26,23 @@ QVector2D MovingChecker::getSpeed()
     return speed;
 }
 
+void MovingChecker::increaseXSpeed(float xSpeed)
+{
+    speed.setX(speed.x() + xSpeed);
+}
+
+void MovingChecker::increaseYSpeed(float ySpeed)
+{
+    speed.setX(speed.y() + ySpeed);
+}
+
+void MovingChecker::resetXSpeed()
+{
+    speed.setX(0);
+}
+
+void MovingChecker::resetYSpeed()
+{
+    speed.setY(0);
+}
+
