@@ -44,10 +44,10 @@ void Physx::RecalculateSpeedWithNewChecker(MovingChecker *movingChecker, MovingC
     // Пересчитываем вектора и записываем в шашки
     float newSpeed = oldSpeed.length() * strikeAngleCos;
     strikeVector *=(newSpeed);
-    standingChecker->getSpeed().x() = strikeVector.x();
-    standingChecker->getSpeed().y() = strikeVector.y();
-    movingChecker->getSpeed().x() = oldSpeed.x() - strikeVector.x();
-    movingChecker->getSpeed().y() = oldSpeed.y() - strikeVector.y();
+    standingChecker->setXSpeed(strikeVector.x());
+    standingChecker->setYSpeed(strikeVector.y());
+    movingChecker->increaseXSpeed(-1 * strikeVector.x());
+    movingChecker->increaseYSpeed(-1 * strikeVector.y());
 }
 
 float Physx::SinVminusPhi(QVector2D V, QVector2D phi)
@@ -87,17 +87,17 @@ void Physx::RecalculateSpeedsOfMovingCheckers(MovingChecker* first, MovingChecke
 
     // Формула, согласно ф-ле столкновения двух движущихся объектов + косинус разности углов
     // Вес шашек идентичен друг другу.
-    first->Xspeed = 2 * secondSpeed * CosVminusPhi(secondVector, interaction) * interaction.x()
-                + firstSpeed * SinVminusPhi(firstVector, interaction) * CosVplusPhi(interaction, piHalf);
+    first->setXSpeed(2 * secondSpeed * CosVminusPhi(secondVector, interaction) * interaction.x()
+                + firstSpeed * SinVminusPhi(firstVector, interaction) * CosVplusPhi(interaction, piHalf));
 
-    first->Yspeed = 2 * secondSpeed * CosVminusPhi(secondVector, interaction) * interaction.y()
-                + firstSpeed * SinVminusPhi(firstVector, interaction) * SinVplusPhi(interaction, piHalf);
+    first->setYSpeed(2 * secondSpeed * CosVminusPhi(secondVector, interaction) * interaction.y()
+                + firstSpeed * SinVminusPhi(firstVector, interaction) * SinVplusPhi(interaction, piHalf));
 
-    second->Xspeed = 2 * firstSpeed * CosVminusPhi(firstVector, interaction) * interaction.x()
-                + secondSpeed * SinVminusPhi(secondVector, interaction) * CosVplusPhi(interaction, piHalf);
+    second->setXSpeed(2 * firstSpeed * CosVminusPhi(firstVector, interaction) * interaction.x()
+                + secondSpeed * SinVminusPhi(secondVector, interaction) * CosVplusPhi(interaction, piHalf));
 
-    first->Yspeed = 2 * firstSpeed * CosVminusPhi(firstVector, interaction) * interaction.y()
-                + secondSpeed * SinVminusPhi(secondVector, interaction) * SinVplusPhi(interaction, piHalf);
+    second->setYSpeed(2 * firstSpeed * CosVminusPhi(firstVector, interaction) * interaction.y()
+                + secondSpeed * SinVminusPhi(secondVector, interaction) * SinVplusPhi(interaction, piHalf));
 }
 
 void Physx::RecalculateSpeeds(MovingChecker* first, MovingChecker* second)
@@ -143,13 +143,13 @@ void Physx::MoveCheckersByOneStep()
         if(fabs(movingCheckers[i].getSpeed().x()) > speedDecrease)
             movingCheckers[i].increaseXSpeed(std::copysign(1, movingCheckers[i].getSpeed().x()) * (-1) * speedDecrease);
         else
-            movingCheckers[i].resetXSpeed();
+            movingCheckers[i].setXSpeed(0);
         std:: cout << " " << movingCheckers[i].getSpeed().x();
 
         if(fabs(movingCheckers[i].getSpeed().y()) > speedDecrease)
             movingCheckers[i].increaseYSpeed(std::copysign(1, movingCheckers[i].getSpeed().y()) * (-1) * speedDecrease);
         else
-            movingCheckers[i].resetYSpeed();
+            movingCheckers[i].setYSpeed(0);
         std:: cout << " " << movingCheckers[i].getSpeed().y() << std::endl;
     }
 }

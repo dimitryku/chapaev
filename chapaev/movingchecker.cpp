@@ -36,13 +36,13 @@ void MovingChecker::increaseYSpeed(float ySpeed)
     speed.setX(speed.y() + ySpeed);
 }
 
-void MovingChecker::resetXSpeed()
+void MovingChecker::setXSpeed(float xSpeed)
 {
-    speed.setX(0);
+    speed.setX(xSpeed);
 }
 
-void MovingChecker::resetYSpeed()
+void MovingChecker::setYSpeed(float ySpeed)
 {
-    speed.setY(0);
+    speed.setY(ySpeed);
 }
 
