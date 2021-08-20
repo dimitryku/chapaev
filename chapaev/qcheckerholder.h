@@ -1,7 +1,7 @@
 #ifndef QCHECKERHOLDER_H
 #define QCHECKERHOLDER_H
 
-#include "qchecker.h"
+#include "qt/qchecker.h"
 #include <vector>
 #include "initgamedata.h"
 #include "game.h"

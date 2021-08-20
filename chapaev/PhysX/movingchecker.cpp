@@ -26,14 +26,14 @@ QVector2D MovingChecker::getSpeed()
     return speed;
 }
 
-void MovingChecker::increaseXSpeed(float xSpeed)
+void MovingChecker::increaseXSpeed(float delta)
 {
-    speed.setX(speed.x() + xSpeed);
+    speed.setX(speed.x() + delta);
 }
 
-void MovingChecker::increaseYSpeed(float ySpeed)
+void MovingChecker::increaseYSpeed(float delta)
 {
-    speed.setX(speed.y() + ySpeed);
+    speed.setX(speed.y() + delta);
 }
 
 void MovingChecker::setXSpeed(float xSpeed)

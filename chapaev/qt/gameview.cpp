@@ -46,10 +46,10 @@ void GameView::SetBoard(int num)
 {
     for(int i = 0; i < num; i++)
         for(int j = 0; j < num; j++)
-            {
-                if((i + j) % 2 == 1)
-                    board->addToGroup(scene->addRect(rectSize*i, rectSize*j, rectSize, rectSize, QPen(Qt::white), QBrush(QColor(119, 153, 82))));
-                else
-                    board->addToGroup(scene->addRect(rectSize*i, rectSize*j, rectSize, rectSize, QPen(Qt::white), QBrush(QColor(255, 255, 231))));
-            }
+        {
+            if((i + j) % 2 == 1)
+                board->addToGroup(scene->addRect(rectSize*i, rectSize*j, rectSize, rectSize, QPen(Qt::white), QBrush(QColor(119, 153, 82))));
+            else
+                board->addToGroup(scene->addRect(rectSize*i, rectSize*j, rectSize, rectSize, QPen(Qt::white), QBrush(QColor(255, 255, 231))));
+        }
 }

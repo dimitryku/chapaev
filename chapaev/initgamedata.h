@@ -2,8 +2,8 @@
 #define GAMEDATALOADER_H
 #include <qvector2d.h>
 #include <vector>
-#include "qchecker.h"
-#include "checkerviewstyle.h"
+#include "qt/qchecker.h"
+#include "qt/checkerviewstyle.h"
 #include "BattleSide.h"
 #include "game.h"
 #include <iostream>

@@ -25,31 +25,31 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     PhysX/gameposition.cpp \
+    PhysX/movingchecker.cpp \
     PhysX/physx.cpp \
         checker.cpp \
-    checkerviewstyle.cpp \
-    gameview.cpp \
     initgamedata.cpp \
         main.cpp \
-        mainwindow.cpp \
-    movingchecker.cpp \
-    qchecker.cpp \
     qcheckerholder.cpp \
-    game.cpp
+    game.cpp \
+    qt/checkerviewstyle.cpp \
+    qt/gameview.cpp \
+    qt/mainwindow.cpp \
+    qt/qchecker.cpp
 
 HEADERS += \
     BattleSide.h \
     PhysX/gameposition.h \
+    PhysX/movingchecker.h \
     PhysX/physx.h \
         checker.h \
-    checkerviewstyle.h \
-    gameview.h \
     initgamedata.h \
-        mainwindow.h \
-    movingchecker.h \
-    qchecker.h \
     qcheckerholder.h \
-    game.h
+    game.h \
+    qt/checkerviewstyle.h \
+    qt/gameview.h \
+    qt/mainwindow.h \
+    qt/qchecker.h
 
 FORMS += \
         mainwindow.ui

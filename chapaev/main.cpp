@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+#include "qt/mainwindow.h"
 #include <QApplication>
 #include "iostream"
 #include "game.h"
