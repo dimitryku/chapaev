@@ -7,13 +7,13 @@ qCheckerHolder::qCheckerHolder(Game* game)
     int i;
     for(i = 0; i < initer->GetBlackCheckersQuantity(); i++)
     {
-        checkers.push_back(new qChecker(game->GetGamePosition()->GetCheckers()[i],
+        checkers.push_back(new qChecker(game->getGamePosition()[i],
                                          stl, BattleSide::black));
     }
     stl = new CheckerViewStyle(BattleSide::white);
     for(int j = i; j < i + initer->GetWhiteCheckersQuantity(); j++)
     {
-        checkers.push_back(new qChecker(game->GetGamePosition()->GetCheckers()[j],
+        checkers.push_back(new qChecker(game->getGamePosition()[j],
                                          stl, BattleSide::white));
     }
 }

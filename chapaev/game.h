@@ -9,7 +9,6 @@
 #include "PhysX/physx.h"
 #include "qt/gameview.h"
 
-class GamePosition;
 class GameView;
 class Physx;
 
@@ -19,16 +18,17 @@ private:
     int WhitePoints;
     int BlackPoints;
     bool WhitesTurn;
-    GamePosition* position;
-    GameView* view;
     Physx* physx;
+    //GamePosition* position;
+    GameView* view;
+
 
 public:
     Game();
     void InitGameData();
     bool IsWhitesTurn();
     void ChangeTurn();
-    GamePosition* GetGamePosition();
+    std::vector<Checker*>& getGamePosition();
 
     ~Game();
 

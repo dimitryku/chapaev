@@ -7,8 +7,7 @@ Game::Game()
     this->WhitesTurn = true;
     this->BlackPoints = 0;
     this->WhitePoints = 0;
-    this->position = new GamePosition();
-    this->physx = new Physx(position);
+    this->physx = new Physx();
 }
 
 void Game::InitGameData()
@@ -22,13 +21,13 @@ bool Game::IsWhitesTurn(){ return WhitesTurn; }
 
 void Game::ChangeTurn(){ WhitesTurn = !WhitesTurn; }
 
-GamePosition* Game::GetGamePosition()
+std::vector<Checker*>& Game::getGamePosition()
 {
-    return position;
+    return physx->getCheckers();
 }
 
 Game::~Game()
 {
-    delete position;
+    //delete position;
     delete physx;
 }

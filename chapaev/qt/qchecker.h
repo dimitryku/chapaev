@@ -1,6 +1,6 @@
 #ifndef QCHECKER_H
 #define QCHECKER_H
-#include "checker.h"
+#include "PhysX/checker.h"
 #include "checkerviewstyle.h"
 #include "QGraphicsItem"
 #include <QPainter>

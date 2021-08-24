@@ -1,4 +1,4 @@
-#include "gameposition.h"
+#include "PhysX/gameposition.h"
 
 
 GamePosition::GamePosition()
@@ -34,7 +34,7 @@ void GamePosition::ResetGamePosition()
     }
 }
 
-std::vector<Checker *> GamePosition::GetCheckers()
+std::vector<Checker*>& GamePosition::getCheckers()
 {
     return checkers;
 }

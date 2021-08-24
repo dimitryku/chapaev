@@ -1,10 +1,10 @@
 #include "physx.h"
 #include <iostream>
 
-Physx::Physx(GamePosition* pos)
+Physx::Physx()
 {
     speedDecrease = 0.3;
-    position = pos;
+    position = new GamePosition();
 }
 
 
@@ -12,7 +12,7 @@ bool Physx::CheckerIsMoving(Checker ch)
 {
     for(MovingChecker mch : movingCheckers)
     {
-        if(mch.checker == &ch)
+        if(mch.getChecker() == &ch)
             return true;
     }
     return false;
@@ -22,7 +22,7 @@ int Physx::FindCheckerInMovingCheckers(Checker* checker)
 {
     for(size_t i = 0; i < movingCheckers.size(); i++)
     {
-        if(movingCheckers[i].checker == checker)
+        if(movingCheckers[i].getChecker() == checker)
         {
             return i;
         }
@@ -35,8 +35,8 @@ void Physx::RecalculateSpeedWithNewChecker(MovingChecker *movingChecker, MovingC
     // Сохраняем скорость движущейся шашки в удобном формате
     QVector2D oldSpeed = QVector2D(movingChecker->getSpeed().x(), movingChecker->getSpeed().y());
     // создаем вектор, по которому полетит стоящая шашка и нормируем его
-    QVector2D strikeVector = QVector2D(standingChecker->checker->GetPosition().x() - movingChecker->checker->GetPosition().x(),
-                                       standingChecker->checker->GetPosition().y() - movingChecker->checker->GetPosition().y());
+    QVector2D strikeVector = QVector2D(standingChecker->getChecker()->GetPosition().x() - movingChecker->getChecker()->GetPosition().x(),
+                                       standingChecker->getChecker()->GetPosition().y() - movingChecker->getChecker()->GetPosition().y());
     strikeVector.normalize();
     // по теореме косинусов считаем косинус угла удара
     float strikeAngleCos = (oldSpeed.x() * strikeVector.x() + oldSpeed.y() * strikeVector.y())/oldSpeed.length();
@@ -123,11 +123,11 @@ void Physx::RecalculateSpeeds(MovingChecker* first, MovingChecker* second)
 std::queue<Checker*> Physx::FindAffectedCheckers(MovingChecker ch)
 {
     std::queue<Checker*> affectedCheckers;
-    for(Checker* checker : position->GetCheckers())
+    for(Checker* checker : position->getCheckers())
     {
         if(!checker->GetOutOfGame()) {
-            if(checker->GetPosition().distanceToPoint(ch.checker->GetPosition()) <= 2*Checker::radius
-                    && checker->GetPosition().distanceToPoint(ch.checker->GetPosition()) > 0.001)
+            if(checker->GetPosition().distanceToPoint(ch.getChecker()->GetPosition()) <= 2*Checker::radius
+                    && checker->GetPosition().distanceToPoint(ch.getChecker()->GetPosition()) > 0.001)
                 affectedCheckers.push(&*checker);
         }
     }
@@ -135,11 +135,16 @@ std::queue<Checker*> Physx::FindAffectedCheckers(MovingChecker ch)
     return affectedCheckers;
 }
 
+std::vector<Checker*>& Physx::getCheckers()
+{
+    return position->getCheckers();
+}
+
 void Physx::MoveCheckersByOneStep()
 {
     for(size_t i = 0; i < movingCheckers.size(); i++)
     {
-        movingCheckers[i].checker->IncrementPosition(movingCheckers[i].getSpeed().x(), movingCheckers[i].getSpeed().y());
+        movingCheckers[i].getChecker()->IncrementPosition(movingCheckers[i].getSpeed().x(), movingCheckers[i].getSpeed().y());
         if(fabs(movingCheckers[i].getSpeed().x()) > speedDecrease)
             movingCheckers[i].increaseXSpeed(std::copysign(1, movingCheckers[i].getSpeed().x()) * (-1) * speedDecrease);
         else

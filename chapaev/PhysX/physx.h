@@ -11,6 +11,13 @@ class GamePosition;
 
 class Physx
 {
+public:
+    Physx();
+    void PerformMoves(MovingChecker checker);
+    void RecalculateSpeeds(MovingChecker* first, MovingChecker* second);
+    std::queue<Checker*> FindAffectedCheckers(MovingChecker ch);
+    std::vector<Checker*>& getCheckers();
+
 private:
     float speedDecrease;
     GamePosition* position;
@@ -29,12 +36,6 @@ private:
     int FindCheckerInMovingCheckers(Checker* checker);
     bool CheckerIsMoving(Checker ch);
 
-
-public:
-    Physx(GamePosition* pos);
-    void PerformMoves(MovingChecker checker);
-    void RecalculateSpeeds(MovingChecker* first, MovingChecker* second);
-    std::queue<Checker*> FindAffectedCheckers(MovingChecker ch);
 };
 
 #endif // PHYSX_H

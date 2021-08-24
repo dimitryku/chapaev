@@ -24,10 +24,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
+    PhysX/checker.cpp \
     PhysX/gameposition.cpp \
     PhysX/movingchecker.cpp \
     PhysX/physx.cpp \
-        checker.cpp \
     initgamedata.cpp \
         main.cpp \
     qcheckerholder.cpp \
@@ -39,10 +39,10 @@ SOURCES += \
 
 HEADERS += \
     BattleSide.h \
+    PhysX/checker.h \
     PhysX/gameposition.h \
     PhysX/movingchecker.h \
     PhysX/physx.h \
-        checker.h \
     initgamedata.h \
     qcheckerholder.h \
     game.h \

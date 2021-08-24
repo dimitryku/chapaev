@@ -11,7 +11,7 @@ private:
 public:
     GamePosition();
     void ResetGamePosition();
-    std::vector<Checker*> GetCheckers();
+    std::vector<Checker*>& getCheckers();
     ~GamePosition();
 };
 

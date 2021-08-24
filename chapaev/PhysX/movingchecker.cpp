@@ -46,3 +46,8 @@ void MovingChecker::setYSpeed(float ySpeed)
     speed.setY(ySpeed);
 }
 
+Checker* MovingChecker::getChecker()
+{
+    return checker;
+}
+

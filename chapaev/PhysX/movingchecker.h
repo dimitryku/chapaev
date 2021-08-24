@@ -6,10 +6,6 @@
 class MovingChecker
 {
 public:
-//    float Xspeed;
-//    float Yspeed;
-    Checker * checker;
-
     explicit MovingChecker(Checker *c);
     MovingChecker(Checker *c, float Xspeed, float Yspeed);
     bool IsMoving();
@@ -18,8 +14,11 @@ public:
     void increaseYSpeed(float delta);
     void setXSpeed(float xSpeed);
     void setYSpeed(float ySpeed);
+    Checker* getChecker();
+
 private:
     QVector2D speed;
+    Checker * checker;
 
 };
 

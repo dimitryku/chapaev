@@ -16,7 +16,7 @@ public:
     explicit Checker();
     QVector2D GetPosition();
     void SetPosition(QVector2D position);
-    void SetOutOfGame (bool t);
+    void SetOutOfGame (bool t = true);
     void IncrementPosition(float x, float y);
     bool GetOutOfGame();
     Checker(Checker& checker);
