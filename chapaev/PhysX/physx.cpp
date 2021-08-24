@@ -20,7 +20,7 @@ bool Physx::CheckerIsMoving(Checker ch)
 
 int Physx::FindCheckerInMovingCheckers(Checker* checker)
 {
-    for(int i = 0; i < movingCheckers.size(); i++)
+    for(size_t i = 0; i < movingCheckers.size(); i++)
     {
         if(movingCheckers[i].checker == checker)
         {
@@ -137,7 +137,7 @@ std::queue<Checker*> Physx::FindAffectedCheckers(MovingChecker ch)
 
 void Physx::MoveCheckersByOneStep()
 {
-    for(int i = 0; i < movingCheckers.size(); i++)
+    for(size_t i = 0; i < movingCheckers.size(); i++)
     {
         movingCheckers[i].checker->IncrementPosition(movingCheckers[i].getSpeed().x(), movingCheckers[i].getSpeed().y());
         if(fabs(movingCheckers[i].getSpeed().x()) > speedDecrease)
@@ -156,7 +156,7 @@ void Physx::MoveCheckersByOneStep()
 
 void Physx::DeleteNotMovingCheckers()
 {
-    for(int i = 0; i < movingCheckers.size(); i++)
+    for(size_t i = 0; i < movingCheckers.size(); i++)
     {
         if(!movingCheckers[i].IsMoving())
         {

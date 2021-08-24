@@ -21,9 +21,9 @@ private:
     bool WhitesTurn;
     GamePosition* position;
     GameView* view;
+    Physx* physx;
 
 public:
-    Physx* physx;
     Game();
     void InitGameData();
     bool IsWhitesTurn();

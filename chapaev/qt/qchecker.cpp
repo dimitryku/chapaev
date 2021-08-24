@@ -48,16 +48,23 @@ BattleSide qChecker::GetBatleSide() const
 void qChecker::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     //std::cout << "pressed checker" << std::endl;
-    //mousePos = event->buttonDownScenePos(Qt::LeftButton);
-    //std::cout << std::endl << mousePos.x() << " " << mousePos.y() << " : ";
+    if(event->button() == Qt::MouseButton::LeftButton)
+    {
+        mousePos = event->QGraphicsSceneMouseEvent::lastScenePos();
+        //std::cout << std::endl << mousePos.x() << " " << mousePos.y() << " : ";
+    }
 }
 
 void qChecker::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    //std::cout << "released checker" << std::endl;
-    QPointF endPos = event->buttonDownScenePos(Qt::LeftButton);
-    std::cout << endPos.x() << " " << endPos.y() << std::endl;
-    endPos -= mousePos;
-    std::cout << endPos.x() << " " << endPos.y() << std::endl;
-    //emit
+    if(event->button() == Qt::MouseButton::LeftButton)
+    {
+        //std::cout << "released checker" << std::endl;
+        QPointF endPos = event->QGraphicsSceneMouseEvent::lastScenePos();
+        //std::cout << endPos.x() << " " << endPos.y() << std::endl;
+        endPos -= mousePos;
+        //std::cout << "diff:" << std::endl;
+        std::cout << endPos.x() << " " << endPos.y() << std::endl;
+        //TODO emit
+    }
 }
