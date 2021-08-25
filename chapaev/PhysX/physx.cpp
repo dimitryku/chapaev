@@ -1,10 +1,10 @@
 #include "physx.h"
 #include <iostream>
 
-Physx::Physx()
+Physx::Physx(GamePosition* position)
 {
     speedDecrease = 0.3;
-    position = new GamePosition();
+    this->position = position;
 }
 
 
@@ -133,11 +133,6 @@ std::queue<Checker*> Physx::FindAffectedCheckers(MovingChecker ch)
     }
 
     return affectedCheckers;
-}
-
-std::vector<Checker*>& Physx::getCheckers()
-{
-    return position->getCheckers();
 }
 
 void Physx::MoveCheckersByOneStep()

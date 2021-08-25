@@ -3,13 +3,14 @@
 
 #include "PhysX/movingchecker.h"
 #include "vector"
-#include "PhysX/gameposition.h"
+#include "gameposition.h"
 #include "initgamedata.h"
 #include "queue"
 #include "PhysX/physx.h"
 #include "qt/gameview.h"
 
 class GameView;
+class GamePosition;
 class Physx;
 
 class Game
@@ -19,7 +20,7 @@ private:
     int BlackPoints;
     bool WhitesTurn;
     Physx* physx;
-    //GamePosition* position;
+    GamePosition* position;
     GameView* view;
 
 

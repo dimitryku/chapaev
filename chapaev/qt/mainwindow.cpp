@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 #include "QtGui"
 #include <QMessageBox>
-#include "PhysX/gameposition.h"
+#include "gameposition.h"
 
 MainWindow::MainWindow(QWidget *parent, Game* game) :
     QMainWindow(parent),

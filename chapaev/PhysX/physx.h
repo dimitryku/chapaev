@@ -12,11 +12,10 @@ class GamePosition;
 class Physx
 {
 public:
-    Physx();
+    Physx(GamePosition* position);
     void PerformMoves(MovingChecker checker);
     void RecalculateSpeeds(MovingChecker* first, MovingChecker* second);
     std::queue<Checker*> FindAffectedCheckers(MovingChecker ch);
-    std::vector<Checker*>& getCheckers();
 
 private:
     float speedDecrease;
