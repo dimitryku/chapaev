@@ -7,7 +7,6 @@
 #include "initgamedata.h"
 #include <queue>
 
-class GamePosition;
 
 class Physx
 {
@@ -16,6 +15,8 @@ public:
     void PerformMoves(MovingChecker checker);
     void RecalculateSpeeds(MovingChecker* first, MovingChecker* second);
     std::queue<Checker*> FindAffectedCheckers(MovingChecker ch);
+
+    ~Physx();
 
 private:
     float speedDecrease;

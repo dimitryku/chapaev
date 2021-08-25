@@ -218,3 +218,10 @@ void Physx::PerformMoves(MovingChecker checker)
     }
 
 }
+
+Physx::~Physx()
+{
+    for(MovingChecker* ch : movingCheckers)
+        delete ch;
+    movingCheckers.~vector();
+}
