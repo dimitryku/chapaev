@@ -30,6 +30,7 @@ public:
     bool IsWhitesTurn();
     void ChangeTurn();
     std::vector<Checker*>& getGamePosition();
+    void SetView(GameView* view);
 
     ~Game();
 

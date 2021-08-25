@@ -27,6 +27,11 @@ std::vector<Checker*>& Game::getGamePosition()
     return position->getCheckers();
 }
 
+void Game::SetView(GameView *view)
+{
+    this->view = view;
+}
+
 Game::~Game()
 {
     delete position;
