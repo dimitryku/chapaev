@@ -2,14 +2,14 @@
 #include <iostream>
 
 
-QRectF qChecker::boundingRect() const
+QRectF QChecker::boundingRect() const
 {
     return QRectF(checker->GetPosition().x() - Checker::radius,
                   checker->GetPosition().y() - Checker::radius,
                   2*Checker::radius, 2*Checker::radius);
 }
 
-void qChecker::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void QChecker::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     painter->setBrush(style->color);
     painter->drawEllipse(this->boundingRect());
@@ -23,29 +23,29 @@ void qChecker::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
                                     Checker::radius/2, Checker::radius/2));
 }
 
-qChecker::qChecker(Checker *checker, CheckerViewStyle *style, BattleSide side) : QGraphicsItem()
+QChecker::QChecker(Checker *checker, CheckerViewStyle *style, BattleSide side) : QGraphicsItem()
 {
     this->checker = checker;
     this->style = style;
     this->side = side;
 }
 
-Checker *qChecker::GetChecker() const
+Checker *QChecker::GetChecker() const
 {
     return checker;
 }
 
-CheckerViewStyle *qChecker::GetViewStyle() const
+CheckerViewStyle *QChecker::GetViewStyle() const
 {
     return style;
 }
 
-BattleSide qChecker::GetBatleSide() const
+BattleSide QChecker::GetBatleSide() const
 {
     return side;
 }
 
-void qChecker::mousePressEvent(QGraphicsSceneMouseEvent *event)
+void QChecker::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     //std::cout << "pressed checker" << std::endl;
     if(event->button() == Qt::MouseButton::LeftButton)
@@ -55,7 +55,7 @@ void qChecker::mousePressEvent(QGraphicsSceneMouseEvent *event)
     }
 }
 
-void qChecker::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+void QChecker::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if(event->button() == Qt::MouseButton::LeftButton)
     {

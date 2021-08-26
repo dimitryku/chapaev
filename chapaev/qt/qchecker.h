@@ -6,7 +6,7 @@
 #include <QPainter>
 #include <QGraphicsSceneMouseEvent>
 
-class qChecker : public QGraphicsItem
+class QChecker : public QGraphicsItem
 {
 private:
     Checker* checker;
@@ -19,7 +19,7 @@ private:
 signals:
 
 public:
-    qChecker(Checker *checker, CheckerViewStyle *style, BattleSide side);
+    QChecker(Checker *checker, CheckerViewStyle *style, BattleSide side);
     Checker* GetChecker() const;
     CheckerViewStyle* GetViewStyle() const;
     BattleSide GetBatleSide() const;

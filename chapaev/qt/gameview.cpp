@@ -29,7 +29,7 @@ GameView::GameView(QObject *parent, Game* game) : QGraphicsView()
 void GameView::SetCheckers(Game* game, int num)
 {
     //float bound = (rectSize - 2*Checker::radius) / 2.0;
-    checkersHolder = new qCheckerHolder(game);
+    checkersHolder = new QCheckersHolder(game);
     for(size_t i = 0; i < checkersHolder->GetCheckers().size(); i++)
     {
         //int r = Checker::radius;

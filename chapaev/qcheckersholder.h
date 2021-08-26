@@ -8,13 +8,13 @@
 
 class Game;
 
-class qCheckerHolder
+class QCheckersHolder
 {
 private:
-    std::vector<qChecker*> checkers;
+    std::vector<QChecker*> checkers;
 public:
-    explicit qCheckerHolder(Game* game);
-    std::vector<qChecker*> GetCheckers() const;
+    explicit QCheckersHolder(Game* game);
+    std::vector<QChecker*> GetCheckers() const;
 };
 
 #endif // QCHECKERHOLDER_H

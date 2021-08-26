@@ -29,7 +29,7 @@ public:
     int GetWhiteCheckersQuantity();
     QVector2D *GetWhiteCheckersPositions();
     QVector2D *GetBlackCheckersPositions();
-    void InitQCheckers(std::vector<qChecker>* checkers, Game* game);
+    void InitQCheckers(std::vector<QChecker>* checkers, Game* game);
     ~InitGameData();
 
 };

@@ -8,12 +8,12 @@
 #include <vector>
 
 #include "game.h"
-#include "qcheckerholder.h"
+#include "qcheckersholder.h"
 #include "qchecker.h"
 #include "qboard.h"
 
 class Game;
-class qCheckerHolder;
+class QCheckersHolder;
 
 class GameView : public QGraphicsView
 {
@@ -29,7 +29,7 @@ private:
     QGraphicsScene* scene;
     QGraphicsItemGroup* checkers;
     QBoard* board;
-    qCheckerHolder* checkersHolder;
+    QCheckersHolder* checkersHolder;
 
     void SetCheckers(Game* game, int num);
 
