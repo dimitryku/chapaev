@@ -80,6 +80,7 @@ void Physx::RecalculateSpeedsOfMovingCheckers(MovingChecker* first, MovingChecke
     secondVector.normalize();
     QVector2D piHalf(cos(M_PI/2), sin(M_PI/2));
     QVector2D interaction;
+
     // так как вектора нормированы, их координаты стали косинусом и синусом соответственно
     interaction.setX((firstVector.x() * secondVector.x() + firstVector.y() * secondVector.y())
                     / (firstSpeed * secondSpeed));
@@ -117,7 +118,6 @@ void Physx::RecalculateSpeeds(MovingChecker* first, MovingChecker* second)
     }
 
     RecalculateSpeedsOfMovingCheckers(first, second);
-
 }
 
 std::queue<Checker*> Physx::FindAffectedCheckers(MovingChecker ch)

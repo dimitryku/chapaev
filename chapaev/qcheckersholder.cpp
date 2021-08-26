@@ -16,6 +16,7 @@ QCheckersHolder::QCheckersHolder(Game* game)
         checkers.push_back(new QChecker(game->getGamePosition()[j],
                                          stl, BattleSide::white));
     }
+    delete initer;
 }
 
 std::vector<QChecker*> QCheckersHolder::GetCheckers() const
