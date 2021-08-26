@@ -30,8 +30,8 @@ SOURCES += \
     gameposition.cpp \
     initgamedata.cpp \
         main.cpp \
-    qcheckerholder.cpp \
     game.cpp \
+    qcheckersholder.cpp \
     qt/checkerviewstyle.cpp \
     qt/gameview.cpp \
     qt/mainwindow.cpp \
@@ -45,8 +45,8 @@ HEADERS += \
     PhysX/physx.h \
     gameposition.h \
     initgamedata.h \
-    qcheckerholder.h \
     game.h \
+    qcheckersholder.h \
     qt/checkerviewstyle.h \
     qt/gameview.h \
     qt/mainwindow.h \

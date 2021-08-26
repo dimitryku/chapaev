@@ -6,6 +6,7 @@
 #include <QGraphicsView>
 #include <QGraphicsItemGroup>
 #include <vector>
+
 #include "game.h"
 #include "qcheckerholder.h"
 #include "qchecker.h"
