@@ -35,6 +35,7 @@ SOURCES += \
     qt/checkerviewstyle.cpp \
     qt/gameview.cpp \
     qt/mainwindow.cpp \
+    qt/qboard.cpp \
     qt/qchecker.cpp
 
 HEADERS += \
@@ -49,6 +50,7 @@ HEADERS += \
     qt/checkerviewstyle.h \
     qt/gameview.h \
     qt/mainwindow.h \
+    qt/qboard.h \
     qt/qchecker.h
 
 FORMS += \

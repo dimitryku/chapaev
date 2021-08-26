@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     view = new GameView(this, game);
 
     //TODO: check, mb change later
-    game->SetView(GameView);
+    game->SetView(view);
 
     ui->gridLayout->addWidget(view);
 }

@@ -9,6 +9,7 @@
 #include "game.h"
 #include "qcheckerholder.h"
 #include "qchecker.h"
+#include "qboard.h"
 
 class Game;
 class qCheckerHolder;
@@ -26,11 +27,10 @@ private:
 
     QGraphicsScene* scene;
     QGraphicsItemGroup* checkers;
-    QGraphicsItemGroup* board;
+    QBoard* board;
     qCheckerHolder* checkersHolder;
 
     void SetCheckers(Game* game, int num);
-    void SetBoard(int num);
 
 };
 

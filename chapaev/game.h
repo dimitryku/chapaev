@@ -23,7 +23,6 @@ private:
     GamePosition* position;
     GameView* view;
 
-
 public:
     Game();
     void InitGameData();
