@@ -53,6 +53,9 @@ void QChecker::mousePressEvent(QGraphicsSceneMouseEvent *event)
         mousePos = event->QGraphicsSceneMouseEvent::lastScenePos();
         //std::cout << std::endl << mousePos.x() << " " << mousePos.y() << " : ";
     }
+
+    //TODO check
+    emit Pressed(this, mousePos);
 }
 
 void QChecker::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
@@ -63,8 +66,13 @@ void QChecker::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         QPointF endPos = event->QGraphicsSceneMouseEvent::lastScenePos();
         //std::cout << endPos.x() << " " << endPos.y() << std::endl;
         endPos -= mousePos;
+        //QVector2D diff = QVector2D(endPos.x() - mousePos.x(), endPos.y() - mousePos.y());
+        QVector2D diff = QVector2D(endPos - mousePos);
         //std::cout << "diff:" << std::endl;
         std::cout << endPos.x() << " " << endPos.y() << std::endl;
-        //TODO emit
+
+        //TODO: check
+        emit Released(this, diff);
+        //TODO emit ...2 (this, endPos);
     }
 }

@@ -6,8 +6,10 @@
 #include <QPainter>
 #include <QGraphicsSceneMouseEvent>
 
-class QChecker : public QGraphicsItem
+class QChecker : public QObject, public QGraphicsItem
 {
+    Q_OBJECT
+
 private:
     Checker* checker;
     CheckerViewStyle* style;
@@ -17,6 +19,8 @@ private:
     QPointF mousePos;
 
 signals:
+    void Pressed(QChecker* checker, QPointF mousePos);
+    void Released(QChecker* checker, QVector2D diff);
 
 public:
     QChecker(Checker *checker, CheckerViewStyle *style, BattleSide side);

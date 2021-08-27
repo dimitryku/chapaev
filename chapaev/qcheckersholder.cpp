@@ -19,7 +19,7 @@ QCheckersHolder::QCheckersHolder(Game* game)
     delete initer;
 }
 
-std::vector<QChecker*> QCheckersHolder::GetCheckers() const
+std::vector<QChecker*>& QCheckersHolder::GetCheckers()
 {
     return checkers;
 }

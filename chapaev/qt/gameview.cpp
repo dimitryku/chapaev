@@ -6,8 +6,6 @@ GameView::GameView(QObject *parent, Game* game) : QGraphicsView()
 {
     scene = new QGraphicsScene();
     this->setScene(scene);
-    checkers = new QGraphicsItemGroup();
-    scene->addItem(checkers);
 
     // создаем доску
     board = new QBoard(8, 8);
@@ -22,8 +20,24 @@ GameView::GameView(QObject *parent, Game* game) : QGraphicsView()
     this->setMinimumWidth(900);
     scene->setBackgroundBrush(QBrush(Qt::gray, Qt::Dense5Pattern));
 
-    //TODO создаем шашки
+    //создаем шашки
     SetCheckers(game, 8);
+    //соединяем сигналы и слоты
+    for(QChecker* ch : checkersHolder->GetCheckers())
+    {
+        connect(ch, SIGNAL(Pressed(QChecker*,QPointF)), this, SLOT(MoveStarted(QChecker*,QVector2D)));
+        connect(ch, SIGNAL(Released(QChecker*,QVector2D)), this, SLOT(MoveFinished(QChecker*,QVector2D)));
+    }
+}
+
+void GameView::MoveStarted(QChecker *checker, QVector2D pos)
+{
+
+}
+
+void GameView::MoveFinished(QChecker *checker, QVector2D diff)
+{
+
 }
 
 void GameView::SetCheckers(Game* game, int num)
@@ -36,9 +50,6 @@ void GameView::SetCheckers(Game* game, int num)
         //int x = checkersHolder->GetCheckers()[i]->GetChecker()->GetPosition().x();
         //int y = checkersHolder->GetCheckers()[i]->GetChecker()->GetPosition().y();
         scene->addItem(checkersHolder->GetCheckers()[i]);
-//        checkers->addToGroup(scene->addEllipse(x + bound, y + bound, 2*r, 2*r,
-//                                               checkersHolder->GetCheckers()[i]->GetViewStyle()->pen,
-//                                               checkersHolder->GetCheckers()[i]->GetViewStyle()->brush));
     }
 }
 

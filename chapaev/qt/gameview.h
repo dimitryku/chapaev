@@ -23,9 +23,11 @@ public:
     static float rectSize;
 
 signals:
+public slots:
+    void MoveStarted(QChecker* checker, QVector2D pos);
+    void MoveFinished(QChecker* checker, QVector2D diff);
 
 private:
-
     QGraphicsScene* scene;
     QGraphicsItemGroup* checkers;
     QBoard* board;

@@ -1,4 +1,4 @@
-#include "PhysX/gameposition.h"
+#include "gameposition.h"
 
 
 GamePosition::GamePosition()

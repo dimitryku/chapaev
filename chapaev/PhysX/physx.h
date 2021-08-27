@@ -7,6 +7,7 @@
 #include "initgamedata.h"
 #include <queue>
 
+class GamePosition;
 
 class Physx
 {
