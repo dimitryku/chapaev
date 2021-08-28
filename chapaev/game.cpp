@@ -1,6 +1,5 @@
 #include "game.h"
 #include "math.h"
-#include <iostream>
 
 Game::Game()
 {
@@ -9,6 +8,7 @@ Game::Game()
     this->whitePoints = 0;
     position = new GamePosition();
     this->physx = new Physx(position);
+    interfaceIsActive = true;
 }
 
 void Game::ChangeTurn()

@@ -1,5 +1,4 @@
 #include "physx.h"
-#include <iostream>
 
 Physx::Physx(GamePosition* position)
 {
@@ -203,10 +202,8 @@ void Physx::PerformMoves(MovingChecker checker)
     movingCheckers.clear();
     movingCheckers.push_back(checker);
 
-    int ttt = 0;
     while (movingCheckers.size()!= 0)
     {
-        std::cout << ttt++ << " (" << movingCheckers.size() << ") " << std::endl;
         // Сдвигаем шашки
         MoveCheckersByOneStep();
 
@@ -216,7 +213,6 @@ void Physx::PerformMoves(MovingChecker checker)
         // Проверяем столкновения и задаем соответствующие скорости
         PerformCheckersInteraction();
     }
-
 }
 
 Physx::~Physx()

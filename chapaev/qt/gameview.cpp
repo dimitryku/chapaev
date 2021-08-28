@@ -1,5 +1,7 @@
 #include "gameview.h"
 
+#include "iostream"
+
 float GameView::rectSize = Checker::radius * 2 + 20;
 
 GameView::GameView(Game* game, QObject *parent) : QGraphicsView()
@@ -29,25 +31,38 @@ GameView::GameView(Game* game, QObject *parent) : QGraphicsView()
         connect(ch, SIGNAL(Pressed(QChecker*, QPointF)), this, SLOT(DragStarted(QChecker*, QPointF)));
         connect(ch, SIGNAL(Released(QChecker*, QVector2D)), this, SLOT(DragFinished(QChecker*, QVector2D)));
     }
+
+    checkerBounder = new ActiveCheckerBounder(checkersHolder->GetCheckers()[0]);
+    dragStarted = false;
 }
 
 void GameView::DragStarted(QChecker *checker, QPointF pos)
 {
     if(game->ManipulationAccepted(checker->GetBatleSide()))
     {
-        //TODO draw line and circle
+        //TODO draw line
+        dragStarted = true;
+        checkerBounder->AddBoundingCircle(checker);
+        scene->addItem(checkerBounder);
     }
 }
 
 void GameView::DragFinished(QChecker *qchecker, QVector2D diff)
 {
-    //TODO remove line and circle
-    game->StartMovement(qchecker->GetChecker(), diff);
+    if(dragStarted)
+    {
+        //TODO remove line
+        scene->removeItem(checkerBounder);
+        //scene->removeItem(qchecker);
+        game->StartMovement(qchecker->GetChecker(), diff);
+        dragStarted = false;
+        std::cout << diff.x() << " " << diff.y() << std::endl;
+    }
 }
 
+//TODO: change
 void GameView::SetCheckers(Game* game, int num)
 {
-    //float bound = (rectSize - 2*Checker::radius) / 2.0;
     checkersHolder = new QCheckersHolder(game);
     for(size_t i = 0; i < checkersHolder->GetCheckers().size(); i++)
     {

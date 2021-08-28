@@ -11,6 +11,7 @@
 #include "qcheckersholder.h"
 #include "qchecker.h"
 #include "qboard.h"
+#include "ActiveCheckerBounder.h"
 
 class Game;
 class QCheckersHolder;
@@ -32,6 +33,8 @@ private:
     QGraphicsScene* scene;
     QBoard* board;
     QCheckersHolder* checkersHolder;
+    ActiveCheckerBounder* checkerBounder;
+    bool dragStarted;
 
     void SetCheckers(Game* game, int num);
 

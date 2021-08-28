@@ -1,11 +1,9 @@
 #include "gameposition.h"
 
-
 GamePosition::GamePosition()
 {
     GamePosition::ResetGamePosition();
 }
-
 
 void GamePosition::ResetGamePosition()
 {

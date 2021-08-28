@@ -3,6 +3,7 @@
 #include "QPen"
 #include "QColor"
 #include "QBrush"
+
 #include "BattleSide.h"
 
 class CheckerViewStyle

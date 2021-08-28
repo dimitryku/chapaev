@@ -1,6 +1,4 @@
 #include "qchecker.h"
-#include <iostream>
-
 
 QRectF QChecker::boundingRect() const
 {
@@ -47,32 +45,19 @@ BattleSide QChecker::GetBatleSide() const
 
 void QChecker::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    //std::cout << "pressed checker" << std::endl;
     if(event->button() == Qt::MouseButton::LeftButton)
     {
         mousePos = event->QGraphicsSceneMouseEvent::lastScenePos();
-        //std::cout << std::endl << mousePos.x() << " " << mousePos.y() << " : ";
+        emit Pressed(this, mousePos);
     }
-
-    //TODO check
-    emit Pressed(this, mousePos);
 }
 
 void QChecker::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if(event->button() == Qt::MouseButton::LeftButton)
     {
-        //std::cout << "released checker" << std::endl;
         QPointF endPos = event->QGraphicsSceneMouseEvent::lastScenePos();
-        //std::cout << endPos.x() << " " << endPos.y() << std::endl;
-        endPos -= mousePos;
-        //QVector2D diff = QVector2D(endPos.x() - mousePos.x(), endPos.y() - mousePos.y());
         QVector2D diff = QVector2D(endPos - mousePos);
-        //std::cout << "diff:" << std::endl;
-        std::cout << endPos.x() << " " << endPos.y() << std::endl;
-
-        //TODO: check
         emit Released(this, diff);
-        //TODO emit ...2 (this, endPos);
     }
 }

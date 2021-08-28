@@ -2,7 +2,6 @@
 #define MOVINGCHECKER_H
 #include "checker.h"
 
-
 class MovingChecker
 {
 public:
