@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     this->game = new Game();
-    view = new GameView(this, game);
+    view = new GameView(game, this);
 
     //TODO: check, mb change later
     game->SetView(view);

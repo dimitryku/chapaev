@@ -19,17 +19,17 @@ class GameView : public QGraphicsView
 {
     Q_OBJECT
 public:
-    GameView(QObject *parent = nullptr, Game* game = 0);
+    GameView(Game* game, QObject *parent = nullptr);
     static float rectSize;
 
 signals:
 public slots:
-    void MoveStarted(QChecker* checker, QVector2D pos);
-    void MoveFinished(QChecker* checker, QVector2D diff);
+    void DragStarted(QChecker* checker, QPointF pos);
+    void DragFinished(QChecker* checker, QVector2D diff);
 
 private:
+    Game* game;
     QGraphicsScene* scene;
-    QGraphicsItemGroup* checkers;
     QBoard* board;
     QCheckersHolder* checkersHolder;
 

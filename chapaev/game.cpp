@@ -4,25 +4,27 @@
 
 Game::Game()
 {
-    this->WhitesTurn = true;
-    this->BlackPoints = 0;
-    this->WhitePoints = 0;
+    this->currentSide = BattleSide::white;
+    this->blackPoints = 0;
+    this->whitePoints = 0;
     position = new GamePosition();
     this->physx = new Physx(position);
 }
 
-void Game::InitGameData()
+void Game::ChangeTurn()
 {
-    this->WhitesTurn = true;
-    this->BlackPoints = 0;
-    this->WhitePoints = 0;
+    switch (currentSide) {
+    case BattleSide::white:
+        currentSide = BattleSide::black;
+        break;
+    case BattleSide::black:
+        currentSide = BattleSide::white;
+    default:
+        break;
+    }
 }
 
-bool Game::IsWhitesTurn(){ return WhitesTurn; }
-
-void Game::ChangeTurn(){ WhitesTurn = !WhitesTurn; }
-
-std::vector<Checker*>& Game::getGamePosition()
+std::vector<Checker*>& Game::GetGamePosition()
 {
     return position->getCheckers();
 }
@@ -30,6 +32,16 @@ std::vector<Checker*>& Game::getGamePosition()
 void Game::SetView(GameView *view)
 {
     this->view = view;
+}
+
+bool Game::ManipulationAccepted(BattleSide side)
+{
+    return (interfaceIsActive && side == currentSide);
+}
+
+void Game::StartMovement(Checker *checker, QVector2D moveInput)
+{
+    //TODO: implement
 }
 
 Game::~Game()

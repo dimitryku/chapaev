@@ -2,8 +2,9 @@
 
 float GameView::rectSize = Checker::radius * 2 + 20;
 
-GameView::GameView(QObject *parent, Game* game) : QGraphicsView()
+GameView::GameView(Game* game, QObject *parent) : QGraphicsView()
 {
+    this->game = game;
     scene = new QGraphicsScene();
     this->setScene(scene);
 
@@ -25,19 +26,23 @@ GameView::GameView(QObject *parent, Game* game) : QGraphicsView()
     //соединяем сигналы и слоты
     for(QChecker* ch : checkersHolder->GetCheckers())
     {
-        connect(ch, SIGNAL(Pressed(QChecker*,QPointF)), this, SLOT(MoveStarted(QChecker*,QVector2D)));
-        connect(ch, SIGNAL(Released(QChecker*,QVector2D)), this, SLOT(MoveFinished(QChecker*,QVector2D)));
+        connect(ch, SIGNAL(Pressed(QChecker*, QPointF)), this, SLOT(DragStarted(QChecker*, QPointF)));
+        connect(ch, SIGNAL(Released(QChecker*, QVector2D)), this, SLOT(DragFinished(QChecker*, QVector2D)));
     }
 }
 
-void GameView::MoveStarted(QChecker *checker, QVector2D pos)
+void GameView::DragStarted(QChecker *checker, QPointF pos)
 {
-
+    if(game->ManipulationAccepted(checker->GetBatleSide()))
+    {
+        //TODO draw line and circle
+    }
 }
 
-void GameView::MoveFinished(QChecker *checker, QVector2D diff)
+void GameView::DragFinished(QChecker *qchecker, QVector2D diff)
 {
-
+    //TODO remove line and circle
+    game->StartMovement(qchecker->GetChecker(), diff);
 }
 
 void GameView::SetCheckers(Game* game, int num)
