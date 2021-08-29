@@ -47,7 +47,7 @@ void QChecker::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if(event->button() == Qt::MouseButton::LeftButton)
     {
-        mousePos = event->QGraphicsSceneMouseEvent::lastScenePos();
+        mousePos = event->QGraphicsSceneMouseEvent::scenePos();
         emit Pressed(this, mousePos);
     }
 }
@@ -56,7 +56,7 @@ void QChecker::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if(event->button() == Qt::MouseButton::LeftButton)
     {
-        QPointF endPos = event->QGraphicsSceneMouseEvent::lastScenePos();
+        QPointF endPos = event->QGraphicsSceneMouseEvent::scenePos();
         QVector2D diff = QVector2D(endPos - mousePos);
         emit Released(this, diff);
     }

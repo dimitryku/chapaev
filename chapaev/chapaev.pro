@@ -35,6 +35,7 @@ SOURCES += \
     qt/ActiveCheckerBounder.cpp \
     qt/checkerviewstyle.cpp \
     qt/gameview.cpp \
+    qt/inputline.cpp \
     qt/mainwindow.cpp \
     qt/qboard.cpp \
     qt/qchecker.cpp
@@ -51,6 +52,7 @@ HEADERS += \
     qt/ActiveCheckerBounder.h \
     qt/checkerviewstyle.h \
     qt/gameview.h \
+    qt/inputline.h \
     qt/mainwindow.h \
     qt/qboard.h \
     qt/qchecker.h

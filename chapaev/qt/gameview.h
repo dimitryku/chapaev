@@ -12,6 +12,7 @@
 #include "qchecker.h"
 #include "qboard.h"
 #include "ActiveCheckerBounder.h"
+#include "inputline.h"
 
 class Game;
 class QCheckersHolder;
@@ -34,10 +35,13 @@ private:
     QBoard* board;
     QCheckersHolder* checkersHolder;
     ActiveCheckerBounder* checkerBounder;
+    InputLine* inputLine;
     bool dragStarted;
 
     void SetCheckers(Game* game, int num);
 
+protected:
+    void mouseMoveEvent(QMouseEvent *event);
 };
 
 #endif // GAMEVIEW_H

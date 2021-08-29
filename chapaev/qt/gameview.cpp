@@ -25,6 +25,7 @@ GameView::GameView(Game* game, QObject *parent) : QGraphicsView()
 
     //создаем шашки
     SetCheckers(game, 8);
+
     //соединяем сигналы и слоты
     for(QChecker* ch : checkersHolder->GetCheckers())
     {
@@ -32,15 +33,20 @@ GameView::GameView(Game* game, QObject *parent) : QGraphicsView()
         connect(ch, SIGNAL(Released(QChecker*, QVector2D)), this, SLOT(DragFinished(QChecker*, QVector2D)));
     }
 
+    //добавляем классы графического изображения действий
     checkerBounder = new ActiveCheckerBounder(checkersHolder->GetCheckers()[0]);
     dragStarted = false;
+    inputLine = new InputLine();
 }
 
 void GameView::DragStarted(QChecker *checker, QPointF pos)
 {
     if(game->ManipulationAccepted(checker->GetBatleSide()))
     {
-        //TODO draw line
+        //TODO fix line
+        setMouseTracking(true);
+        inputLine->SetStartPoint(pos);
+        scene->addItem(inputLine);
         dragStarted = true;
         checkerBounder->AddBoundingCircle(checker);
         scene->addItem(checkerBounder);
@@ -51,9 +57,8 @@ void GameView::DragFinished(QChecker *qchecker, QVector2D diff)
 {
     if(dragStarted)
     {
-        //TODO remove line
+        scene->removeItem(inputLine);
         scene->removeItem(checkerBounder);
-        //scene->removeItem(qchecker);
         game->StartMovement(qchecker->GetChecker(), diff);
         dragStarted = false;
         std::cout << diff.x() << " " << diff.y() << std::endl;
@@ -72,4 +77,14 @@ void GameView::SetCheckers(Game* game, int num)
         scene->addItem(checkersHolder->GetCheckers()[i]);
     }
 }
+#include "QMouseEvent"
 
+void GameView::mouseMoveEvent(QMouseEvent *event)
+{
+    if(dragStarted)
+    {
+        QPointF pos = event->pos();
+        //scene->
+        inputLine->SetMousePos(pos);
+    }
+}
