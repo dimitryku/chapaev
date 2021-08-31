@@ -1,5 +1,4 @@
 #include "movingchecker.h"
-#include <math.h>
 
 MovingChecker::MovingChecker(Checker *c)
 {
@@ -32,32 +31,32 @@ QVector2D MovingChecker::getSpeed()
     return speed;
 }
 
-void MovingChecker::increaseSpeed(QVector2D delta)
+void MovingChecker::IncreaseSpeed(QVector2D delta)
 {
     speed += delta;
 }
 
-void MovingChecker::increaseXSpeed(float delta)
+void MovingChecker::IncreaseXSpeed(float delta)
 {
     speed.setX(speed.x() + delta);
 }
 
-void MovingChecker::increaseYSpeed(float delta)
+void MovingChecker::IncreaseYSpeed(float delta)
 {
     speed.setY(speed.y() + delta);
 }
 
-void MovingChecker::setXSpeed(float xSpeed)
+void MovingChecker::SetXSpeed(float xSpeed)
 {
     speed.setX(xSpeed);
 }
 
-void MovingChecker::setYSpeed(float ySpeed)
+void MovingChecker::SetYSpeed(float ySpeed)
 {
     speed.setY(ySpeed);
 }
 
-Checker* MovingChecker::getChecker()
+Checker* MovingChecker::GetChecker()
 {
     return checker;
 }

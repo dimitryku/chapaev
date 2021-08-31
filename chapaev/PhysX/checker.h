@@ -1,7 +1,6 @@
 #ifndef CHECKER_H
 #define CHECKER_H
 
-#include <QObject>
 #include <QVector2D>
 
 class Checker

@@ -2,7 +2,7 @@
 #define PHYSX_H
 
 #include <vector>
-#include "math.h"
+#include <math.h>
 #include <queue>
 
 #include "movingchecker.h"
@@ -17,8 +17,6 @@ public:
     Physx(GamePosition* position);
     void PrepareData(Checker* checker, QVector2D speed);
     std::vector<Checker*> MakeStep();
-
-    void PerformMoves(MovingChecker checker);
 
     ~Physx();
 

@@ -1,5 +1,7 @@
 #ifndef MOVINGCHECKER_H
 #define MOVINGCHECKER_H
+#include <math.h>
+
 #include "checker.h"
 
 class MovingChecker
@@ -10,12 +12,12 @@ public:
     MovingChecker(Checker *c, QVector2D speed);
     bool IsMoving();
     QVector2D getSpeed();
-    void increaseSpeed(QVector2D delta);
-    void increaseXSpeed(float delta);
-    void increaseYSpeed(float delta);
-    void setXSpeed(float xSpeed);
-    void setYSpeed(float ySpeed);
-    Checker* getChecker();
+    void IncreaseSpeed(QVector2D delta);
+    void IncreaseXSpeed(float delta);
+    void IncreaseYSpeed(float delta);
+    void SetXSpeed(float xSpeed);
+    void SetYSpeed(float ySpeed);
+    Checker* GetChecker();
     void MakeStep();
 
 private:
