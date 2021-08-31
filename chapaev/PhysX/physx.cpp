@@ -180,18 +180,8 @@ void Physx::MoveCheckersByOneStep()
             speedDecreaser.setY(movingCheckers[i].getSpeed().y());
 
         movingCheckers[i].increaseSpeed(speedDecreaser);
-
-//        if(fabs(movingCheckers[i].getSpeed().x()) > speedDecrease)
-//            movingCheckers[i].increaseXSpeed(std::copysign(1, movingCheckers[i].getSpeed().x()) * (-1) * speedDecrease);
-//        else
-//            movingCheckers[i].setXSpeed(0);
-        std:: cout << "speed " << movingCheckers[i].getSpeed().x();
-
-//        if(fabs(movingCheckers[i].getSpeed().y()) > speedDecrease)
-//            movingCheckers[i].increaseYSpeed(std::copysign(1, movingCheckers[i].getSpeed().y()) * (-1) * speedDecrease);
-//        else
-//            movingCheckers[i].setYSpeed(0);
-        std:: cout << " " << movingCheckers[i].getSpeed().y() << std::endl;
+        //std:: cout << "speed " << movingCheckers[i].getSpeed().x();
+        //std:: cout << " " << movingCheckers[i].getSpeed().y() << std::endl;
     }
 }
 
