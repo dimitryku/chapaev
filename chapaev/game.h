@@ -1,8 +1,9 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "vector"
-#include "queue"
+#include <vector>
+#include <queue>
+#include <QTimer>
 
 #include "PhysX/movingchecker.h"
 #include "PhysX/physx.h"
@@ -15,8 +16,22 @@ class GameView;
 class GamePosition;
 class Physx;
 
-class Game
+class Game : public QObject
 {
+public:
+    Game();
+    void ChangeTurn();
+    std::vector<Checker*>& GetGamePosition();
+    void SetView(GameView* view);
+    bool ManipulationAccepted(BattleSide side);
+    void StartMovement(Checker* checker, QVector2D moveInput);
+    void FinishMovement();
+
+    ~Game();
+
+private slots:
+    void MakeStep();
+
 private:
     int whitePoints;
     int blackPoints;
@@ -25,16 +40,7 @@ private:
     Physx* physx;
     GamePosition* position;
     GameView* view;
-
-public:
-    Game();
-    void ChangeTurn();
-    std::vector<Checker*>& GetGamePosition();
-    void SetView(GameView* view);
-    bool ManipulationAccepted(BattleSide side);
-    void StartMovement(Checker* checker, QVector2D moveInput);
-
-    ~Game();
+    QTimer* timer;
 
 };
 

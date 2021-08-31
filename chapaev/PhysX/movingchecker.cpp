@@ -15,6 +15,12 @@ MovingChecker::MovingChecker(Checker *c, float Xspeed, float Yspeed)
     this->speed.setY(Yspeed);
 }
 
+MovingChecker::MovingChecker(Checker *c, QVector2D speed)
+{
+    this->checker = c;
+    this->speed = speed;
+}
+
 bool MovingChecker::IsMoving()
 {
     bool ans = (fabs(speed.x()) > 0.001 && fabs(speed.y()) > 0.001);

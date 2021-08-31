@@ -15,9 +15,10 @@ class Physx
 {
 public:
     Physx(GamePosition* position);
+    void PrepareData(Checker* checker, QVector2D speed);
+    std::vector<Checker*> MakeStep();
+
     void PerformMoves(MovingChecker checker);
-    void RecalculateSpeeds(MovingChecker* first, MovingChecker* second);
-    std::queue<Checker*> FindAffectedCheckers(MovingChecker ch);
 
     ~Physx();
 
@@ -31,6 +32,8 @@ private:
     float CosVplusPhi(QVector2D V, QVector2D phi);
     float SinVplusPhi(QVector2D V, QVector2D phi);
 
+    std::queue<Checker*> FindAffectedCheckers(MovingChecker ch);
+    void RecalculateSpeeds(MovingChecker* first, MovingChecker* second);
     void RecalculateSpeedWithNewChecker(MovingChecker* movingChecker, MovingChecker* standingChecker);
     void RecalculateSpeedsOfMovingCheckers(MovingChecker* first, MovingChecker* second);
     void MoveCheckersByOneStep();

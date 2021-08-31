@@ -9,6 +9,10 @@ Game::Game()
     position = new GamePosition();
     this->physx = new Physx(position);
     interfaceIsActive = true;
+
+    timer = new QTimer(this);
+    timer->setInterval(10);
+    connect(timer, SIGNAL(timeout()), this, SLOT(MakeStep()));
 }
 
 void Game::ChangeTurn()
@@ -41,7 +45,31 @@ bool Game::ManipulationAccepted(BattleSide side)
 
 void Game::StartMovement(Checker *checker, QVector2D moveInput)
 {
+    interfaceIsActive = false;
+    //TODO: change speed
+    physx->PrepareData(checker, moveInput);
+    //TODO: start timer
+    timer->start();
+}
+
+void Game::MakeStep()
+{
     //TODO: implement
+    std::vector<Checker*> affectedCheckers = physx->MakeStep();
+    if(!affectedCheckers.empty())
+    {
+        //TODO: update info
+    }
+    else
+    {
+        FinishMovement();
+    }
+}
+
+void Game::FinishMovement()
+{
+    timer->stop();
+    interfaceIsActive = true;
 }
 
 Game::~Game()

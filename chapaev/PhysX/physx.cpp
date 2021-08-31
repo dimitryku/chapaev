@@ -6,6 +6,31 @@ Physx::Physx(GamePosition* position)
     this->position = position;
 }
 
+void Physx::PrepareData(Checker *checker, QVector2D speed)
+{
+    movingCheckers.push_back(MovingChecker(checker, speed));
+}
+
+std::vector<Checker *> Physx::MakeStep()
+{
+    // Запоминаем какие шашки были передвинуты во время шага
+    std::vector<Checker *> affectedCheckers;
+    for(MovingChecker mch : movingCheckers)
+        affectedCheckers.push_back(mch.getChecker());
+
+    // Сдвигаем шашки
+    MoveCheckersByOneStep();
+
+    // Удаляем остановившиеся шашки
+    DeleteNotMovingCheckers();
+
+    // Проверяем столкновения и задаем соответствующие скорости
+    PerformCheckersInteraction();
+
+    // Возвращаем список шашек на перерисовку
+    return affectedCheckers;
+}
+
 
 bool Physx::CheckerIsMoving(Checker ch)
 {
@@ -199,10 +224,10 @@ void Physx::PerformCheckersInteraction()
 
 void Physx::PerformMoves(MovingChecker checker)
 {
-    movingCheckers.clear();
+    //movingCheckers.clear();
     movingCheckers.push_back(checker);
 
-    while (movingCheckers.size()!= 0)
+    while (movingCheckers.size() != 0)
     {
         // Сдвигаем шашки
         MoveCheckersByOneStep();
