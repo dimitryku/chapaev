@@ -3,6 +3,7 @@
 Physx::Physx(GamePosition* position)
 {
     speedDecrease = 0.3;
+    minSpeed = 0.01;
     this->position = position;
 }
 
@@ -165,17 +166,31 @@ void Physx::MoveCheckersByOneStep()
 {
     for(size_t i = 0; i < movingCheckers.size(); i++)
     {
-        movingCheckers[i].getChecker()->IncrementPosition(movingCheckers[i].getSpeed().x(), movingCheckers[i].getSpeed().y());
-        if(fabs(movingCheckers[i].getSpeed().x()) > speedDecrease)
-            movingCheckers[i].increaseXSpeed(std::copysign(1, movingCheckers[i].getSpeed().x()) * (-1) * speedDecrease);
-        else
+        QVector2D speedDecreaser = movingCheckers[i].getSpeed().normalized() * (-speedDecrease);
+        movingCheckers[i].MakeStep();
+        if(speedDecreaser.length() > movingCheckers[i].getSpeed().length())
+        {
             movingCheckers[i].setXSpeed(0);
+            movingCheckers[i].setYSpeed(0);
+            continue;
+        }
+        if(fabs(speedDecreaser.x()) > fabs(movingCheckers[i].getSpeed().x()))
+            speedDecreaser.setX(movingCheckers[i].getSpeed().x());
+        if(fabs(speedDecreaser.y()) > fabs(movingCheckers[i].getSpeed().y()))
+            speedDecreaser.setY(movingCheckers[i].getSpeed().y());
+
+        movingCheckers[i].increaseSpeed(speedDecreaser);
+
+//        if(fabs(movingCheckers[i].getSpeed().x()) > speedDecrease)
+//            movingCheckers[i].increaseXSpeed(std::copysign(1, movingCheckers[i].getSpeed().x()) * (-1) * speedDecrease);
+//        else
+//            movingCheckers[i].setXSpeed(0);
         std:: cout << "speed " << movingCheckers[i].getSpeed().x();
 
-        if(fabs(movingCheckers[i].getSpeed().y()) > speedDecrease)
-            movingCheckers[i].increaseYSpeed(std::copysign(1, movingCheckers[i].getSpeed().y()) * (-1) * speedDecrease);
-        else
-            movingCheckers[i].setYSpeed(0);
+//        if(fabs(movingCheckers[i].getSpeed().y()) > speedDecrease)
+//            movingCheckers[i].increaseYSpeed(std::copysign(1, movingCheckers[i].getSpeed().y()) * (-1) * speedDecrease);
+//        else
+//            movingCheckers[i].setYSpeed(0);
         std:: cout << " " << movingCheckers[i].getSpeed().y() << std::endl;
     }
 }

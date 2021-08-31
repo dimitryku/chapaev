@@ -46,14 +46,12 @@ void Game::StartMovement(Checker *checker, QVector2D moveInput)
 {
     interfaceIsActive = false;
     //TODO: change speed
-    physx->PrepareData(checker, moveInput*0.1);
-    //TODO: start timer
+    physx->PrepareData(checker, moveInput * (-0.1)); // минус, так как движение в обратную сторону
     timer->start();
 }
 
 void Game::MakeStep()
 {
-    //TODO: implement
     std::vector<Checker*> affectedCheckers = physx->MakeStep();
     if(!affectedCheckers.empty())
     {

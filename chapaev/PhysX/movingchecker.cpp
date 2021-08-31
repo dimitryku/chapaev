@@ -32,6 +32,11 @@ QVector2D MovingChecker::getSpeed()
     return speed;
 }
 
+void MovingChecker::increaseSpeed(QVector2D delta)
+{
+    speed += delta;
+}
+
 void MovingChecker::increaseXSpeed(float delta)
 {
     speed.setX(speed.x() + delta);
@@ -55,5 +60,10 @@ void MovingChecker::setYSpeed(float ySpeed)
 Checker* MovingChecker::getChecker()
 {
     return checker;
+}
+
+void MovingChecker::MakeStep()
+{
+    checker->IncrementPosition(speed.x(), speed.y());
 }
 

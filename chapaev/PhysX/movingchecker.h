@@ -10,11 +10,13 @@ public:
     MovingChecker(Checker *c, QVector2D speed);
     bool IsMoving();
     QVector2D getSpeed();
+    void increaseSpeed(QVector2D delta);
     void increaseXSpeed(float delta);
     void increaseYSpeed(float delta);
     void setXSpeed(float xSpeed);
     void setYSpeed(float ySpeed);
     Checker* getChecker();
+    void MakeStep();
 
 private:
     QVector2D speed;

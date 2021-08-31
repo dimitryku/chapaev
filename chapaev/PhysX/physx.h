@@ -24,6 +24,7 @@ public:
 
 private:
     float speedDecrease;
+    float minSpeed;
     GamePosition* position;
     std::vector<MovingChecker> movingCheckers;
 
