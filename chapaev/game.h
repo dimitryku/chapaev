@@ -4,6 +4,7 @@
 #include <vector>
 #include <queue>
 #include <QTimer>
+#include <math.h>
 
 #include "PhysX/movingchecker.h"
 #include "PhysX/physx.h"
@@ -18,6 +19,8 @@ class Physx;
 
 class Game : public QObject
 {
+    Q_OBJECT
+
 public:
     Game();
     void ChangeTurn();
@@ -29,7 +32,7 @@ public:
 
     ~Game();
 
-private slots:
+protected slots:
     void MakeStep();
 
 private:

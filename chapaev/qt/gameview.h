@@ -6,6 +6,7 @@
 #include <QGraphicsView>
 #include <QGraphicsItemGroup>
 #include <vector>
+#include <QMouseEvent>
 
 #include "game.h"
 #include "qcheckersholder.h"
@@ -24,7 +25,8 @@ public:
     GameView(Game* game, QObject *parent = nullptr);
     static float rectSize;
 
-signals:
+    void UpdatePositions(std::vector<Checker*> checkers);
+
 public slots:
     void DragStarted(QChecker* checker, QPointF pos);
     void DragFinished(QChecker* checker, QVector2D diff);

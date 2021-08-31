@@ -1,5 +1,4 @@
 #include "game.h"
-#include "math.h"
 
 Game::Game()
 {
@@ -47,7 +46,7 @@ void Game::StartMovement(Checker *checker, QVector2D moveInput)
 {
     interfaceIsActive = false;
     //TODO: change speed
-    physx->PrepareData(checker, moveInput);
+    physx->PrepareData(checker, moveInput*0.1);
     //TODO: start timer
     timer->start();
 }
@@ -58,7 +57,7 @@ void Game::MakeStep()
     std::vector<Checker*> affectedCheckers = physx->MakeStep();
     if(!affectedCheckers.empty())
     {
-        //TODO: update info
+        view->UpdatePositions(affectedCheckers);
     }
     else
     {

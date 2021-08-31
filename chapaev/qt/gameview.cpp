@@ -39,6 +39,18 @@ GameView::GameView(Game* game, QObject *parent) : QGraphicsView()
     inputLine = new InputLine();
 }
 
+void GameView::UpdatePositions(std::vector<Checker *> checkers)
+{
+//    for(Checker* ch : checkers)
+//    {
+//        QChecker* updatedCh = checkersHolder->GetConnectedQChecker(ch);
+//        updatedCh->update();
+//    }
+    //this->viewport()->update();
+    this->viewport()->repaint();
+    //scene->update();
+}
+
 void GameView::DragStarted(QChecker *checker, QPointF pos)
 {
     if(game->ManipulationAccepted(checker->GetBatleSide()))
@@ -77,7 +89,6 @@ void GameView::SetCheckers(Game* game, int num)
         scene->addItem(checkersHolder->GetCheckers()[i]);
     }
 }
-#include "QMouseEvent"
 
 void GameView::mouseMoveEvent(QMouseEvent *event)
 {

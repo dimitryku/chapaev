@@ -14,6 +14,7 @@ private:
 public:
     explicit QCheckersHolder(Game* game);
     std::vector<QChecker*>& GetCheckers();
+    QChecker *GetConnectedQChecker(Checker* checker);
 };
 
 #endif // QCHECKERHOLDER_H

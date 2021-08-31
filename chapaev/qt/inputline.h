@@ -14,6 +14,10 @@ public:
 
 private:
     QPointF startPoint;
+
+    // QGraphicsItem interface
+protected:
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
 };
 
 #endif // QINPUTLINE_H

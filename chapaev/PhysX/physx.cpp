@@ -8,6 +8,8 @@ Physx::Physx(GamePosition* position)
 
 void Physx::PrepareData(Checker *checker, QVector2D speed)
 {
+    // В этот момент вектор пуст, так как иначе мы бы
+    // продолжали движения
     movingCheckers.push_back(MovingChecker(checker, speed));
 }
 
@@ -168,7 +170,7 @@ void Physx::MoveCheckersByOneStep()
             movingCheckers[i].increaseXSpeed(std::copysign(1, movingCheckers[i].getSpeed().x()) * (-1) * speedDecrease);
         else
             movingCheckers[i].setXSpeed(0);
-        std:: cout << " " << movingCheckers[i].getSpeed().x();
+        std:: cout << "speed " << movingCheckers[i].getSpeed().x();
 
         if(fabs(movingCheckers[i].getSpeed().y()) > speedDecrease)
             movingCheckers[i].increaseYSpeed(std::copysign(1, movingCheckers[i].getSpeed().y()) * (-1) * speedDecrease);

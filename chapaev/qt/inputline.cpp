@@ -21,3 +21,9 @@ void InputLine::SetMousePos(QPointF point)
 {
     this->setLine(startPoint.x(), startPoint.y(), point.x(), point.y());
 }
+
+void InputLine::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+    QPointF finishPoint = event->pos();
+    setLine(startPoint.x(), startPoint.y(), finishPoint.x(), finishPoint.y());
+}

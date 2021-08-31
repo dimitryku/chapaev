@@ -23,3 +23,13 @@ std::vector<QChecker*>& QCheckersHolder::GetCheckers()
 {
     return checkers;
 }
+
+QChecker *QCheckersHolder::GetConnectedQChecker(Checker *checker)
+{
+    for(QChecker* ch : checkers)
+    {
+        if(ch->GetChecker() == checker)
+            return ch;
+    }
+    return nullptr;
+}

@@ -23,7 +23,7 @@ MovingChecker::MovingChecker(Checker *c, QVector2D speed)
 
 bool MovingChecker::IsMoving()
 {
-    bool ans = (fabs(speed.x()) > 0.001 && fabs(speed.y()) > 0.001);
+    bool ans = (fabs(speed.x()) > 0.001 || fabs(speed.y()) > 0.001);
     return ans;
 }
 
@@ -39,7 +39,7 @@ void MovingChecker::increaseXSpeed(float delta)
 
 void MovingChecker::increaseYSpeed(float delta)
 {
-    speed.setX(speed.y() + delta);
+    speed.setY(speed.y() + delta);
 }
 
 void MovingChecker::setXSpeed(float xSpeed)
