@@ -1,5 +1,9 @@
 #include "game.h"
 
+
+#include "PhysX/physx.h"
+#include "qt/gameview.h"
+
 Game::Game()
 {
     this->currentSide = BattleSide::white;

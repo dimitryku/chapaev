@@ -1,4 +1,5 @@
 #include "gameposition.h"
+#include "initgamedata.h"
 
 GamePosition::GamePosition()
 {

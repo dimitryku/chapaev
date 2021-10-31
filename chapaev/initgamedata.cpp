@@ -1,5 +1,7 @@
 #include "initgamedata.h"
 
+#include "qt/gameview.h"
+
 InitGameData* InitGameData::instance = 0;
 
 InitGameData* InitGameData::GetInstance()

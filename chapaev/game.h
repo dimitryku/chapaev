@@ -7,10 +7,7 @@
 #include <math.h>
 
 #include "PhysX/movingchecker.h"
-#include "PhysX/physx.h"
-#include "qt/gameview.h"
 #include "gameposition.h"
-#include "initgamedata.h"
 #include "BattleSide.h"
 
 class GameView;
