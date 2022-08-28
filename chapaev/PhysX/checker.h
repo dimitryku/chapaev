@@ -5,23 +5,21 @@
 
 class Checker
 {
-private:
-    QVector2D position;
-    bool isOutOfGame;
-
 public:
     static float radius;
 
-    explicit Checker();
-    QVector2D GetPosition();
-    void SetPosition(QVector2D position);
-    void SetOutOfGame (bool t = true);
-    void IncrementPosition(float x, float y);
-    bool GetOutOfGame();
-    Checker(Checker& checker);
+    Checker();
+    Checker(const Checker& checker);
 
-signals:
+    QVector2D getPosition() const;
+    void setPosition(const QVector2D& position);
+    void setOutOfGame (bool value = true);
+    void incrementPosition(const QVector2D& delta);
+    bool getOutOfGame() const;
 
+private:
+    QVector2D position;
+    bool isOutOfGame;
 };
 
 #endif // CHECKER_H

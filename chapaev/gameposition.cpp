@@ -21,7 +21,7 @@ void GamePosition::ResetGamePosition()
     {
         if(checkers[i] == nullptr)
             checkers[i] = new Checker();
-        checkers[i]->SetPosition(InitGameData::GetInstance()->GetWhiteCheckersPositions()[i]);
+        checkers[i]->setPosition(InitGameData::GetInstance()->GetWhiteCheckersPositions()[i]);
     }
 
     // Заполнение начальной информации шашек
@@ -29,7 +29,7 @@ void GamePosition::ResetGamePosition()
     {
         if(checkers[i + wCheckersNumber] == nullptr)
             checkers[i + wCheckersNumber] = new Checker();
-        checkers[i + wCheckersNumber]->SetPosition(InitGameData::GetInstance()->GetBlackCheckersPositions()[i]);
+        checkers[i + wCheckersNumber]->setPosition(InitGameData::GetInstance()->GetBlackCheckersPositions()[i]);
     }
 }
 

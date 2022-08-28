@@ -8,17 +8,17 @@ class MovingChecker
 {
 public:
     explicit MovingChecker(Checker *c);
-    MovingChecker(Checker *c, float Xspeed, float Yspeed);
-    MovingChecker(Checker *c, QVector2D speed);
+    //MovingChecker(Checker *c, float Xspeed, float Yspeed);
+    MovingChecker(Checker *c, const QVector2D& speed);
     bool IsMoving();
     QVector2D getSpeed();
-    void IncreaseSpeed(QVector2D delta);
+    void IncreaseSpeed(const QVector2D& delta);
     void IncreaseXSpeed(float delta);
     void IncreaseYSpeed(float delta);
     void SetXSpeed(float xSpeed);
     void SetYSpeed(float ySpeed);
-    Checker* GetChecker();
-    void MakeStep();
+    Checker* GetChecker() const;
+    void makeStep();
 
 private:
     QVector2D speed;

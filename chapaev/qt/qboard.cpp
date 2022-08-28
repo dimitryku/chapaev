@@ -1,5 +1,7 @@
 #include "qboard.h"
 
+#include <QPainter>
+
 QBoard::QBoard(int xBlocks, int yBlocks)
 {
     this->xBlocks = xBlocks;
@@ -14,6 +16,9 @@ QRectF QBoard::boundingRect() const
 //TODO: check coordinates translation
 void QBoard::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    Q_UNUSED(option)
+    Q_UNUSED(widget)
+
     painter->setBrush(QBrush(QColor(119, 153, 82))); //TODO change
     for(int i = 0; i < yBlocks; i++)
         for(int j = 0; j < xBlocks; j++)

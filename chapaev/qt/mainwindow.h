@@ -22,8 +22,8 @@ private slots:
     void on_NewGameButton_clicked();
 
 private:
-    GameView* view;
     Game* game;
+    GameView* view;
     Ui::MainWindow *ui;
 };
 

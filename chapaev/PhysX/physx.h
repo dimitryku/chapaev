@@ -15,31 +15,30 @@ class Physx
 {
 public:
     Physx(GamePosition* position);
-    void PrepareData(Checker* checker, QVector2D speed);
+    void PrepareData(Checker* checker, const QVector2D& speed);
     std::vector<Checker*> MakeStep();
 
     ~Physx();
 
 private:
     float speedDecrease;
-    float minSpeed;
     GamePosition* position;
     std::vector<MovingChecker> movingCheckers;
 
-    float SinVminusPhi(QVector2D V, QVector2D phi);
-    float CosVminusPhi(QVector2D V, QVector2D phi);
-    float CosVplusPhi(QVector2D V, QVector2D phi);
-    float SinVplusPhi(QVector2D V, QVector2D phi);
+    float SinVminusPhi(const QVector2D& V, const QVector2D& phi);
+    float CosVminusPhi(const QVector2D& V, const QVector2D& phi);
+    float CosVplusPhi(const QVector2D& V, const QVector2D& phi);
+    float SinVplusPhi(const QVector2D& V, const QVector2D& phi);
 
-    std::queue<Checker*> FindAffectedCheckers(MovingChecker ch);
-    void RecalculateSpeeds(MovingChecker* first, MovingChecker* second);
+    std::queue<Checker*> findAffectedCheckers(const MovingChecker& ch);
+    void recalculateSpeeds(MovingChecker* first, MovingChecker* second);
     void RecalculateSpeedWithNewChecker(MovingChecker* movingChecker, MovingChecker* standingChecker);
-    void RecalculateSpeedsOfMovingCheckers(MovingChecker* first, MovingChecker* second);
-    void MoveCheckersByOneStep();
-    void DeleteNotMovingCheckers();
-    void PerformCheckersInteraction();
+    void recalculateSpeedsOfMovingCheckers(MovingChecker* first, MovingChecker* second);
+    void moveCheckersByOneStep();
+    void deleteNotMovingCheckers();
+    void performCheckersInteraction();
     int FindCheckerInMovingCheckers(Checker* checker);
-    bool CheckerIsMoving(Checker ch);
+    bool checkerIsMoving(const Checker& ch);
 
 };
 

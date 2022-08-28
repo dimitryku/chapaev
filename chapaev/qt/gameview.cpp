@@ -1,10 +1,9 @@
 #include "gameview.h"
-
-#include "iostream"
+#include <QDebug>
 
 float GameView::rectSize = Checker::radius * 2 + 20;
 
-GameView::GameView(Game* game, QObject *parent) : QGraphicsView()
+GameView::GameView(Game* game) : QGraphicsView()
 {
     this->game = game;
     scene = new QGraphicsScene();
@@ -34,9 +33,14 @@ GameView::GameView(Game* game, QObject *parent) : QGraphicsView()
     }
 
     //добавляем классы графического изображения действий
-    checkerBounder = new ActiveCheckerBounder(checkersHolder->GetCheckers()[0]);
+    checkerBounder = new ActiveCheckerBounder();
     dragStarted = false;
     inputLine = new InputLine();
+}
+
+GameView::~GameView()
+{
+    delete checkersHolder;
 }
 
 void GameView::UpdatePositions(std::vector<Checker *> checkers)
@@ -51,30 +55,30 @@ void GameView::UpdatePositions(std::vector<Checker *> checkers)
     //scene->update();
 }
 
-void GameView::DragStarted(QChecker *checker, QPointF pos)
+void GameView::DragStarted(QChecker *checker, const QPointF& pos)
 {
-    if(game->ManipulationAccepted(checker->GetBatleSide()))
-    {
-        //TODO fix line
-        setMouseTracking(true);
-        inputLine->SetStartPoint(pos);
-        scene->addItem(inputLine);
-        dragStarted = true;
-        checkerBounder->AddBoundingCircle(checker);
-        scene->addItem(checkerBounder);
-    }
+    if(!game->ManipulationAccepted(checker->GetBatleSide()))
+        return;
+
+    //TODO fix line
+    setMouseTracking(true);
+    inputLine->SetStartPoint(pos);
+    scene->addItem(inputLine);
+    dragStarted = true;
+    checkerBounder->AddBoundingCircle(checker);
+    scene->addItem(checkerBounder);
 }
 
 void GameView::DragFinished(QChecker *qchecker, QVector2D diff)
 {
-    if(dragStarted)
-    {
-        scene->removeItem(inputLine);
-        scene->removeItem(checkerBounder);
-        game->StartMovement(qchecker->GetChecker(), diff);
-        dragStarted = false;
-        std::cout << diff.x() << " " << diff.y() << std::endl;
-    }
+    if(!dragStarted)
+        return;
+
+    scene->removeItem(inputLine);
+    scene->removeItem(checkerBounder);
+    game->StartMovement(qchecker->GetChecker(), diff);
+    dragStarted = false;
+    qDebug() << diff.x() << diff.y();
 }
 
 //TODO: change
@@ -94,8 +98,7 @@ void GameView::mouseMoveEvent(QMouseEvent *event)
 {
     if(dragStarted)
     {
-        QPointF pos = event->pos();
-        //scene->
+        QPointF pos = mapToScene(event->pos());
         inputLine->SetMousePos(pos);
     }
 }

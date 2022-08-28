@@ -1,14 +1,14 @@
 #ifndef QCHECKERDRAGVISUALISER_H
 #define QCHECKERDRAGVISUALISER_H
 
-#include "QGraphicsItem"
+#include <QGraphicsItem>
 
-#include "qchecker.h"
+class QChecker;
 
 class ActiveCheckerBounder: public QGraphicsItem
 {
 public:
-    ActiveCheckerBounder(QChecker* checker);
+    explicit ActiveCheckerBounder();
     void AddBoundingCircle(QChecker* checker);
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);

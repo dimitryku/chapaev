@@ -1,8 +1,7 @@
 #ifndef QBOARD_H
 #define QBOARD_H
 
-#include "QGraphicsItem"
-#include "QPainter"
+#include <QGraphicsItem>
 
 #include "PhysX/checker.h"
 

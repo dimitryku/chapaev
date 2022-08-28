@@ -1,15 +1,15 @@
 #include "ActiveCheckerBounder.h"
+#include "qchecker.h"
 
-
-ActiveCheckerBounder::ActiveCheckerBounder(QChecker* checker)
+ActiveCheckerBounder::ActiveCheckerBounder()
+    : centerPoint()
+    , radius(Checker::radius)
 {
-    centerPoint = checker->GetChecker()->GetPosition().toPointF();
-    radius = Checker::radius;
 }
 
 void ActiveCheckerBounder::AddBoundingCircle(QChecker *checker)
 {
-    centerPoint = checker->GetChecker()->GetPosition().toPointF();
+    centerPoint = checker->GetChecker()->getPosition().toPointF();
     radius = Checker::radius;
 }
 

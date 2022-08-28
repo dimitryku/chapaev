@@ -7,14 +7,14 @@ MovingChecker::MovingChecker(Checker *c)
     this->speed.setY(0);
 }
 
-MovingChecker::MovingChecker(Checker *c, float Xspeed, float Yspeed)
-{
-    this->checker = c;
-    this->speed.setX(Xspeed);
-    this->speed.setY(Yspeed);
-}
+//MovingChecker::MovingChecker(Checker *c, float Xspeed, float Yspeed)
+//{
+//    this->checker = c;
+//    this->speed.setX(Xspeed);
+//    this->speed.setY(Yspeed);
+//}
 
-MovingChecker::MovingChecker(Checker *c, QVector2D speed)
+MovingChecker::MovingChecker(Checker *c, const QVector2D& speed)
 {
     this->checker = c;
     this->speed = speed;
@@ -22,8 +22,7 @@ MovingChecker::MovingChecker(Checker *c, QVector2D speed)
 
 bool MovingChecker::IsMoving()
 {
-    bool ans = (fabs(speed.x()) > 0.001 || fabs(speed.y()) > 0.001);
-    return ans;
+    return fabs(speed.x()) > 0.001 || fabs(speed.y()) > 0.001;
 }
 
 QVector2D MovingChecker::getSpeed()
@@ -31,7 +30,7 @@ QVector2D MovingChecker::getSpeed()
     return speed;
 }
 
-void MovingChecker::IncreaseSpeed(QVector2D delta)
+void MovingChecker::IncreaseSpeed(const QVector2D& delta)
 {
     speed += delta;
 }
@@ -56,13 +55,13 @@ void MovingChecker::SetYSpeed(float ySpeed)
     speed.setY(ySpeed);
 }
 
-Checker* MovingChecker::GetChecker()
+Checker* MovingChecker::GetChecker() const
 {
     return checker;
 }
 
-void MovingChecker::MakeStep()
+void MovingChecker::makeStep()
 {
-    checker->IncrementPosition(speed.x(), speed.y());
+    checker->incrementPosition(speed);
 }
 

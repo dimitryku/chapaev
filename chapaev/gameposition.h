@@ -1,11 +1,9 @@
-
 #ifndef GAMEPOSITION_H
 #define GAMEPOSITION_H
 
 #include <vector>
 
 #include "PhysX/checker.h"
-
 
 class GamePosition
 {

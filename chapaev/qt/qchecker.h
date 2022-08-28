@@ -14,8 +14,8 @@ private:
     Checker* checker;
     CheckerViewStyle* style;
     BattleSide side;
-    //QRectF boundingRect() const;
     void paint(QPainter* painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    QRectF boundingRect() const;
     QPointF mousePos;
 
 signals:
@@ -23,15 +23,12 @@ signals:
     void Released(QChecker* checker, QVector2D diff);
 
 public:
-    QRectF boundingRect() const;
     QChecker(Checker *checker, CheckerViewStyle *style, BattleSide side);
     Checker* GetChecker() const;
     CheckerViewStyle* GetViewStyle() const;
     BattleSide GetBatleSide() const;
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
-
-
 };
 
 #endif // QCHECKER_H

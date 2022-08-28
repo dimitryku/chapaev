@@ -1,13 +1,9 @@
 #ifndef GAMEDATALOADER_H
 #define GAMEDATALOADER_H
-#include <qvector2d.h>
-#include <vector>
-#include <iostream>
+#include <QVector2D>
 
 #include "qt/qchecker.h"
 #include "qt/checkerviewstyle.h"
-#include "BattleSide.h"
-#include "game.h"
 
 class Game;
 
@@ -16,10 +12,8 @@ class InitGameData
 private:
     static InitGameData* instance;
 
-    int blackCheckersQuantity;
-    int whiteCheckersQuantity;
-    QVector2D *blackCheckersPos;
-    QVector2D *whiteCheckersPos;
+    QVector<QVector2D> blackCheckersPositions;
+    QVector<QVector2D> whiteCheckersPositions;
     void loadGameData();
 
 public:
@@ -28,10 +22,9 @@ public:
     int GetCheckersQuantity();
     int GetBlackCheckersQuantity();
     int GetWhiteCheckersQuantity();
-    QVector2D *GetWhiteCheckersPositions();
-    QVector2D *GetBlackCheckersPositions();
+    const QVector<QVector2D>& GetWhiteCheckersPositions() const { return whiteCheckersPositions; }
+    const QVector<QVector2D>& GetBlackCheckersPositions() const { return blackCheckersPositions; }
     void InitQCheckers(std::vector<QChecker>* checkers, Game* game);
-    ~InitGameData();
 
 };
 

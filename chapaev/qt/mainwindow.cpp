@@ -1,16 +1,17 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "QtGui"
+
 #include <QMessageBox>
+
 #include "gameposition.h"
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent)
+    , game(new Game())
+    , view(new GameView(game))
+    , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    this->game = new Game();
-    view = new GameView(game, this);
 
     //TODO: check, mb change later
     game->SetView(view);
@@ -20,10 +21,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
 void MainWindow::on_NewGameButton_clicked()
 {
-    QMessageBox *mb = new QMessageBox("Внимание!", "Начать новую игру? Прогресс будет потерян!", QMessageBox::Information, QMessageBox::Yes,
-                                      QMessageBox::No, 0);
-    int reply = mb->exec();
-    delete mb;
+    QMessageBox mb("Внимание!", "Начать новую игру? Прогресс будет потерян!",
+                    QMessageBox::Information,
+                    QMessageBox::Yes, QMessageBox::No, 0);
+    int reply = mb.exec();
     if(reply == QMessageBox::Yes)
     {
         //TODO restart game
@@ -38,5 +39,6 @@ GameView *MainWindow::GetView()
 
 MainWindow::~MainWindow()
 {
+    delete view;
     delete ui;
 }

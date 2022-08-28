@@ -1,7 +1,6 @@
 #ifndef GAMEVIEW_H
 #define GAMEVIEW_H
 
-#include <QObject>
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QGraphicsItemGroup>
@@ -22,13 +21,14 @@ class GameView : public QGraphicsView
 {
     Q_OBJECT
 public:
-    GameView(Game* game, QObject *parent = nullptr);
+    GameView(Game* game);
+    ~GameView();
     static float rectSize;
 
     void UpdatePositions(std::vector<Checker*> checkers);
 
 public slots:
-    void DragStarted(QChecker* checker, QPointF pos);
+    void DragStarted(QChecker* checker, const QPointF& pos);
     void DragFinished(QChecker* checker, QVector2D diff);
 
 private:
@@ -44,6 +44,7 @@ private:
 
 protected:
     void mouseMoveEvent(QMouseEvent *event);
+
 };
 
 #endif // GAMEVIEW_H

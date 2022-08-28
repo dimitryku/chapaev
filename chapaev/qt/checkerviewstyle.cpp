@@ -8,6 +8,5 @@ CheckerViewStyle::CheckerViewStyle(BattleSide side)
     else
         this->color = QColor(Qt::lightGray);
     brush = QBrush(color);
-
 }
 

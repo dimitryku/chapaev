@@ -7,28 +7,34 @@ Checker::Checker()
     isOutOfGame = false;
 }
 
-void Checker::SetPosition(QVector2D position) { this->position = position; }
-
-void Checker::SetOutOfGame(bool t)
+void Checker::setPosition(const QVector2D& position)
 {
-    this->isOutOfGame = t;
+    this->position = position;
 }
 
-void Checker::IncrementPosition(float x, float y)
+void Checker::setOutOfGame(bool value)
 {
-    this->position.setX(this->position.x() + x);
-    this->position.setY(this->position.y() + y);
+    this->isOutOfGame = value;
 }
 
-bool Checker::GetOutOfGame()
+void Checker::incrementPosition(const QVector2D& delta)
+{
+    this->position.setX(this->position.x() + delta.x());
+    this->position.setY(this->position.y() + delta.y());
+}
+
+bool Checker::getOutOfGame() const
 {
     return isOutOfGame;
 }
 
-Checker::Checker(Checker &checker)
+Checker::Checker(const Checker &checker)
 {
     this->position = checker.position;
     this->isOutOfGame = checker.isOutOfGame;
 }
 
-QVector2D Checker::GetPosition() { return position; }
+QVector2D Checker::getPosition() const
+{
+    return position;
+}

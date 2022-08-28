@@ -1,23 +1,24 @@
 #include "inputline.h"
 
+#include <QPen>
+
 InputLine::InputLine()
 {
-    QPen* newPen = new QPen();
-    newPen->setStyle(Qt::SolidLine);
-    newPen->setColor(Qt::blue);
-    newPen->setWidth(2);
-    this->setPen(*newPen);
-    delete newPen;
+    QPen pen;
+    pen.setStyle(Qt::SolidLine);
+    pen.setColor(Qt::blue);
+    pen.setWidth(2);
+    this->setPen(pen);
     this->setLine(1, 1, 500, 500);
 }
 
-void InputLine::SetStartPoint(QPointF point)
+void InputLine::SetStartPoint(const QPointF& point)
 {
     startPoint = point;
     this->setLine(startPoint.x(), startPoint.y(), point.x(), point.y());
 }
 
-void InputLine::SetMousePos(QPointF point)
+void InputLine::SetMousePos(const QPointF& point)
 {
     this->setLine(startPoint.x(), startPoint.y(), point.x(), point.y());
 }

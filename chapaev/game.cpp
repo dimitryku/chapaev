@@ -56,7 +56,7 @@ void Game::StartMovement(Checker *checker, QVector2D moveInput)
 
 void Game::MakeStep()
 {
-    std::vector<Checker*> affectedCheckers = physx->MakeStep();
+    auto affectedCheckers = physx->MakeStep();
     if(!affectedCheckers.empty())
     {
         view->UpdatePositions(affectedCheckers);
@@ -71,6 +71,7 @@ void Game::FinishMovement()
 {
     timer->stop();
     interfaceIsActive = true;
+    ChangeTurn();
 }
 
 Game::~Game()
